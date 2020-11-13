@@ -39,13 +39,19 @@ Proposition *ajouteEnTete(Proposition *regle, char nvProp) {
     return nouveau;
 }
 
+
+
+
 Proposition *ajouteEnQueRec(Proposition *regle, char nvProp) { //Ajoute récursivement une proposition en queue
 
-    Proposition *nouveau = malloc(sizeof(*nouveau));
-    nouveau->valeur = nvProp;
-    nouveau->suivant = NULL;
+
 
     if (regle == NULL) {
+
+        Proposition *nouveau = malloc(sizeof(*nouveau));
+        nouveau->valeur = nvProp;
+        nouveau->suivant = NULL;
+
         return nouveau;
     }
     regle->suivant = ajouteEnQueRec(regle->suivant, nvProp);
