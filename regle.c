@@ -68,8 +68,9 @@ Proposition *suppressionTeteRec(Proposition *regle) { // Supprime récursivement
         tmp=regle->suivant;
         free (regle);
         return tmp;
+    }else {
+        return NULL;
     }
-    return NULL;
 }
 
 Proposition *suppressionRec(Proposition *regle, char vSupp) { // Supprime récursivement une proposition de la prémisse
