@@ -61,9 +61,10 @@ Proposition *ajouteEnQueRec(Proposition *regle, char nvProp) { //Ajoute récursi
 
 Proposition *suppressionTeteRec(Proposition *regle) { // Supprime récursivement la tête
 
-    Proposition *tmp;
+
     if(regle!=NULL)
     {
+        Proposition *tmp;
         tmp=regle->suivant;
         free (regle);
         return tmp;
