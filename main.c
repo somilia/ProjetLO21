@@ -10,7 +10,7 @@ int main() {
     test = creerRegle();
     afficherRegle(test);
 
-    test->premier = suppressionTeteRec(test->premier);
+    test = suppressionTeteRec(test);
     afficherRegle(test);
     printf("isEmpty: %d\n", isEmpty(test));
 
@@ -23,18 +23,22 @@ int main() {
     afficherRegle(test);
 
     printf("la valeur de la tete: %c\n", valeurTete(test));
-    printf("la valeur de la queue: %c\n", valeurQueue(test->premier));
-    printf("La proposition B appartient t-elle a la premissse: %d\n", rechercheRec(test->premier, 'B'));
+    printf("la valeur de la queue: %c\n", valeurQueue(test));
+    printf("La proposition B appartient t-elle a la premisse: %d\n", rechercheRec(test->premier, 'B'));
     test->premier = ajouteEnQueRec(test->premier,'K');
     afficherRegle(test);
 
     test->premier = ajouteEnQueRec(test->premier, 'D');
     afficherRegle(test);
 
-    test->premier = suppressionRec(test->premier, 'K');
+    test = suppressionRec(test, 'K');
+    afficherRegle(test);
+
+    test->premier = ajouteEnTete(test, 'Z');
     afficherRegle(test);
 
     printf("isEmpty: %d\n", isEmpty(test));
+
 
     //  afficherRegle((Regle*)recherche_rec(test->premier, 'K'));
 

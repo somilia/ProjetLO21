@@ -20,19 +20,19 @@ struct Regle
 Regle *creerRegle();
 Proposition *creerConclusion(Regle*, char);
 
-Proposition *ajouteEnTete(Proposition*, char);
+Proposition *ajouteEnTete(Regle*, char);
 Proposition *ajouteEnQueRec(Proposition*, char);
 
-Proposition *suppressionTeteRec(Proposition*);
-Proposition *suppressionRec(Proposition*, char);
+Regle *suppressionTeteRec(Regle*);
+Regle *suppressionRec(Regle *, char);
 
 void afficherRegle(Regle*);
 
 bool rechercheRec(Proposition*, char);
-bool pAppartientPrem(Proposition *, char);
+
 bool isEmpty(Regle*);
 char valeurTete(Regle*);
-char valeurQueue(Proposition *);
+char valeurQueue(Regle*);
 
 void afficheListeRec(Proposition*);
 Proposition *insertion(Proposition *, char);

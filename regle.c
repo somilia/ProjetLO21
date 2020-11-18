@@ -20,7 +20,7 @@ Regle *creerRegle() {
     return regle;
 }
 // Cette fonction n'a pas vrm de sens pour l'instant
-Proposition *creerConclusion(Regle *regle, char vConclu) { // Créer la conclusion d'une règle
+/*Proposition *creerConclusion(Regle *regle, char vConclu) { // Créer la conclusion d'une règle
     Proposition *conclusion = malloc(sizeof(Proposition));
     conclusion->valeur = vConclu;
     conclusion->suivant = NULL;
@@ -28,22 +28,18 @@ Proposition *creerConclusion(Regle *regle, char vConclu) { // Créer la conclusi
     ajouteEnQueRec(regle, conclusion->valeur);
 
     return conclusion;
-}
+}*/
 
-Proposition *ajouteEnTete(Proposition *regle, char nvProp) {
+Proposition *ajouteEnTete(Regle *regle, char nvProp) {
 
     Proposition *nouveau = malloc(sizeof(*nouveau));
     nouveau->valeur = nvProp;
-    nouveau->suivant = NULL;
-    nouveau->suivant=regle;
+    nouveau->suivant=regle->premier;
     return nouveau;
 }
 
 
-
-
 Proposition *ajouteEnQueRec(Proposition *regle, char nvProp) { //Ajoute récursivement une proposition en queue
-
 
 
     if (regle == NULL) {
@@ -59,38 +55,44 @@ Proposition *ajouteEnQueRec(Proposition *regle, char nvProp) { //Ajoute récursi
 
 }
 
-Proposition *suppressionTeteRec(Proposition *regle) { // Supprime récursivement la tête
+Regle *suppressionTeteRec(Regle *regle) { // Supprime récursivement la tête
 
 
     if(regle!=NULL)
     {
-        Proposition *tmp;
+        /*Regle *tmp;
         tmp=regle->suivant;
         free (regle);
-        return tmp;
+        return tmp;*/
+
+        Proposition *pSupp;
+        pSupp = regle->premier;
+        regle->premier = regle->premier->suivant;
+        free (pSupp);
+        return regle;
     }else {
         return NULL;
     }
 }
 
-Proposition *suppressionRec(Proposition *regle, char vSupp) { // Supprime récursivement une proposition de la prémisse
+Regle *suppressionRec(Regle *regle, char vSupp) { // Supprime récursivement une proposition de la prémisse
 
-    if (!rechercheRec(regle, vSupp)) { // On vérifie que l'élément est présent dans la liste
+    if(regle==NULL) return NULL;
+
+    if (!rechercheRec(regle->premier, vSupp)) { // On vérifie que l'élément est présent dans la liste
         exit(EXIT_FAILURE);
     }
 
-    if(regle==NULL) return NULL;
-    Proposition *tmp = regle;
-    if(tmp->suivant->valeur==vSupp) {
-        Proposition *pSupp = tmp->suivant;
-        tmp->suivant = tmp->suivant->suivant;
+    if(regle->premier->suivant->valeur==vSupp) {
+        Proposition *pSupp = regle->premier->suivant;
+        regle->premier->suivant = regle->premier->suivant->suivant;
         free(pSupp);
 
-        return tmp;
+        return regle;
     }
 
-    regle->suivant = suppressionRec(regle->suivant, vSupp);
-    return regle;
+    regle->premier = regle->premier->suivant;
+    return suppressionRec(regle, vSupp);
 
 }
 
@@ -111,10 +113,10 @@ void afficherRegle(Regle *regle)
     printf("NULL\n");
 }
 
-
+// wtf elle marche cette fonction, elle renvoie 0 pour la liste test
 bool rechercheRec(Proposition *regle, char vRecherche) { // Test si une proposition appartient à la règle
 
-    if(regle==NULL) return NULL;
+    if(regle==NULL) return false;
     if(regle->valeur==vRecherche) {
         return true;
     }
@@ -128,14 +130,16 @@ bool isEmpty(Regle *regle) { // Test si la prémisse est vide
 char valeurTete(Regle *regle) { // Proposition en tête de la prémisse
     return regle->premier->valeur;
 }
-char valeurQueue(Proposition *regle) { // Conclusion de la prémisse
+char valeurQueue(Regle *regle) { // Conclusion de la prémisse
     if(regle==NULL) exit(EXIT_FAILURE) ;
 
-    if(regle->suivant==NULL) {
 
-        return regle->valeur;
+    if(regle->premier->suivant==NULL) {
+
+        return regle->premier->valeur;
     }
-    return valeurQueue(regle->suivant);
+    regle->premier = regle->premier->suivant;
+    return valeurQueue(regle);
 }
 
 /**
