@@ -5,8 +5,9 @@
 
 #include "regle.h"
 
-Regle *creerRegle() {
-    Regle *regle = malloc(sizeof(Regle));
+
+Regle creerRegle() {
+    Regle regle = malloc(sizeof(Regle));
     Proposition *proposition = malloc(sizeof(Proposition));
 
     if (regle == NULL || proposition == NULL) {
@@ -15,7 +16,7 @@ Regle *creerRegle() {
 
     proposition->valeur = '_';
     proposition->suivant = NULL;
-    regle->premier = proposition;
+    regle = proposition;
 
     return regle;
 }
@@ -30,32 +31,55 @@ Regle *creerRegle() {
     return conclusion;
 }*/
 
-Proposition *ajouteEnTete(Regle *regle, char nvProp) {
+Regle ajouteEnTete(Regle regle, char nvProp) {
 
     Proposition *nouveau = malloc(sizeof(*nouveau));
     nouveau->valeur = nvProp;
-    nouveau->suivant=regle->premier;
-    return nouveau;
+    nouveau->suivant=regle;
+    return regle;
 }
 
+Proposition creerProposition(char nvProp){
+    Proposition *nouveau = malloc(sizeof(*nouveau));
+    nouveau->valeur = nvProp;
+    nouveau->suivant = NULL;
+    return *nouveau;
 
-Proposition *ajouteEnQueRec(Proposition *regle, char nvProp) { //Ajoute récursivement une proposition en queue
+}
+
+Regle ajouteEnQueRec(Regle regle, char nvProp) { //Ajoute récursivement une proposition en queue
 
 
     if (regle == NULL) {
-
         Proposition *nouveau = malloc(sizeof(*nouveau));
         nouveau->valeur = nvProp;
         nouveau->suivant = NULL;
 
         return nouveau;
+    }else{
+
+        regle->suivant=ajouteEnQueRec(regle->suivant, nvProp);
+        return regle;
     }
-    regle->suivant = ajouteEnQueRec(regle->suivant, nvProp);
-    return regle;
+
 
 }
 
-Regle *suppressionTeteRec(Regle *regle) { // Supprime récursivement la tête
+Regle reste(Regle regle){
+    if(regle==NULL){
+
+        return regle;
+    }else{
+        Proposition *nouveau = regle;
+        regle=regle->suivant;
+        free(nouveau);
+        return regle;
+
+
+    }
+}
+
+Regle suppressionTeteRec(Regle regle) { // Supprime récursivement la tête
 
 
     if(regle!=NULL)
@@ -66,8 +90,8 @@ Regle *suppressionTeteRec(Regle *regle) { // Supprime récursivement la tête
         return tmp;*/
 
         Proposition *pSupp;
-        pSupp = regle->premier;
-        regle->premier = regle->premier->suivant;
+        pSupp = regle;
+        regle = regle->suivant;
         free (pSupp);
         return regle;
     }else {
@@ -75,35 +99,35 @@ Regle *suppressionTeteRec(Regle *regle) { // Supprime récursivement la tête
     }
 }
 
-Regle *suppressionRec(Regle *regle, char vSupp) { // Supprime récursivement une proposition de la prémisse
+Regle suppressionRec(Regle regle, char vSupp) { // Supprime récursivement une proposition de la prémisse
 
     if(regle==NULL) return NULL;
 
-    if (!rechercheRec(regle->premier, vSupp)) { // On vérifie que l'élément est présent dans la liste
+    if (!rechercheRec(regle, vSupp)) { // On vérifie que l'élément est présent dans la liste
         exit(EXIT_FAILURE);
     }
 
-    if(regle->premier->suivant->valeur==vSupp) {
-        Proposition *pSupp = regle->premier->suivant;
-        regle->premier->suivant = regle->premier->suivant->suivant;
+    if(regle->suivant->valeur==vSupp) {
+        Proposition *pSupp = regle->suivant;
+        regle->suivant = regle->suivant->suivant;
         free(pSupp);
 
         return regle;
     }
 
-    regle->premier = regle->premier->suivant;
+    regle = regle->suivant;
     return suppressionRec(regle, vSupp);
 
 }
 
-void afficherRegle(Regle *regle)
+void afficherRegle(Regle regle)
 {
-    if (regle == NULL)
+    /*if (regle == NULL)
     {
         exit(EXIT_FAILURE);
-    }
+    }*/
 
-    Proposition *actuel = regle->premier;
+    Proposition *actuel = regle;
 
     while (actuel != NULL)
     {
@@ -123,22 +147,22 @@ bool rechercheRec(Proposition *regle, char vRecherche) { // Test si une proposit
     return rechercheRec(regle->suivant,vRecherche);
 }
 
-bool isEmpty(Regle *regle) { // Test si la prémisse est vide
-    if (regle->premier == NULL) return true;
+bool isEmpty(Regle regle) { // Test si la prémisse est vide
+    if (regle == NULL) return true;
     else return false;
 }
-char valeurTete(Regle *regle) { // Proposition en tête de la prémisse
-    return regle->premier->valeur;
+char valeurTete(Regle regle) { // Proposition en tête de la prémisse
+    return regle->valeur;
 }
-char valeurQueue(Regle *regle) { // Conclusion de la prémisse
+char valeurQueue(Regle regle) { // Conclusion de la prémisse
     if(regle==NULL) exit(EXIT_FAILURE) ;
 
 
-    if(regle->premier->suivant==NULL) {
+    if(regle->suivant==NULL) {
 
-        return regle->premier->valeur;
+        return regle->valeur;
     }
-    regle->premier = regle->premier->suivant;
+    regle = regle->suivant;
     return valeurQueue(regle);
 }
 

@@ -4,39 +4,35 @@
 #include <stdlib.h>
 
 
-typedef struct Proposition Proposition;
-struct Proposition
+
+typedef struct proposition
 {
     char valeur;
-    Proposition *suivant;
-};
+    struct proposition* suivant;
+}Proposition;
 
-typedef struct Regle Regle;
-struct Regle
-{
-    Proposition *premier;
-};
+typedef Proposition* Regle;
 
-Regle *creerRegle();
-Proposition *creerConclusion(Regle*, char);
+Regle creerRegle();
+Regle creerConclusion(Regle, char);
 
-Proposition *ajouteEnTete(Regle*, char);
-Proposition *ajouteEnQueRec(Proposition*, char);
+Regle ajouteEnTete(Regle, char);
+Regle ajouteEnQueRec(Regle regle, char nvProp);
+Regle suppressionTeteRec(Regle);
+Regle suppressionRec(Regle , char);
 
-Regle *suppressionTeteRec(Regle*);
-Regle *suppressionRec(Regle *, char);
-
-void afficherRegle(Regle*);
+void afficherRegle(Regle);
 
 bool rechercheRec(Proposition*, char);
 
-bool isEmpty(Regle*);
-char valeurTete(Regle*);
-char valeurQueue(Regle*);
+bool isEmpty(Regle);
+char valeurTete(Regle);
+char valeurQueue(Regle);
 
-void afficheListeRec(Proposition*);
-Proposition *insertion(Proposition *, char);
-void suppression(Regle*, char);
-
+void afficheListeRec(Proposition);
+Proposition *insertion(Proposition , char);
+void suppression(Regle, char);
+Regle reste(Regle regle);
+Proposition creerProposition(char nvProp);
 
 #endif //PROJETLO21_REGLE_H
