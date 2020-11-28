@@ -3,4 +3,4 @@ project(ProjetLO21 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(ProjetLO21 main.c regle.c regle.h)
+add_executable(ProjetLO21 main.c regle.c regle.h bc.c bc.h cmake-build-debug/moteur.c cmake-build-debug/moteur.h)

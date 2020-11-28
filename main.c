@@ -1,42 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "regle.h"
+#include "bc.h"
 
 int main() {
 
-    Regle test;
-    test = creerRegle();
+    Regle *test;
+    test = creerRegle("fievre");
     afficherRegle(test);
 
     test = suppressionTeteRec(test);
     afficherRegle(test);
     printf("isEmpty: %d\n", isEmpty(test));
 
-    test= ajouteEnQueRec(test,'A');
+    test->premier = ajouteEnQueRec(test->premier, "A");
     afficherRegle(test);
-    test = ajouteEnQueRec(test, 'B');
-    afficherRegle(test);
-
-    test = ajouteEnQueRec(test, 'C');
+    test->premier = ajouteEnQueRec(test->premier, "B");
     afficherRegle(test);
 
-    printf("la valeur de la tete: %c\n", valeurTete(test));
-    printf("la valeur de la queue: %c\n", valeurQueue(test));
-    printf("La proposition B appartient t-elle a la premissse: %d\n", rechercheRec(test, 'B'));
-    test = ajouteEnQueRec(test,'K');
+    test->premier = ajouteEnQueRec(test->premier, "C");
     afficherRegle(test);
 
-    test = ajouteEnQueRec(test, 'D');
+    printf("la valeur de la tete: %s\n", valeurTete(test));
+    printf("la valeur de la queue: %s\n", valeurQueue(test));
+    printf("La proposition B appartient t-elle a la premisse: %d\n", rechercheRec(test->premier, "B"));
+    test->premier = ajouteEnQueRec(test->premier, "K");
     afficherRegle(test);
 
-    test = suppressionRec(test, 'K');
+    test->premier = ajouteEnQueRec(test->premier, "D");
+    afficherRegle(test);
+
+    // La fonction plante
+  //  test = suppressionRec(test, "K");
+    afficherRegle(test);
+
+    test->premier = ajouteEnTete(test, "Z");
     afficherRegle(test);
 
     printf("isEmpty: %d\n", isEmpty(test));
 
-    //  afficherRegle((Regle*)recherche_rec(test->premier, 'K'));
+
+    printf("\nTest de la BC:\n");
+
+    BC bc = creerBC();
+    initBC(bc);
+
+    afficherRegle(bc);
+
+  //  Regle *test2;
+  //  test2 = creerRegle("toux");
+  //  test2->premier = ajouteEnQueRec(test2->premier, "B");
+
+  //  bc = ajouteEnQueBc(bc , test2->premier);
+  //  test2=renvoitetebc(bc);
 
     return 0;
 }
