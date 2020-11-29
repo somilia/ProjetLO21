@@ -16,28 +16,40 @@ BC creerBC(){
     return bc;
 }
 
+Regle* insertiondsr(int max ,char* tableau[],Regle *regle,char* conclusion){
+    for(int i=0;i<max;i++){
+        regle->premier=ajouteEnQueRec(regle->premier,tableau[i]);
+    }
+    creerConclusion(regle->premier, conclusion);
+    return regle;
+}
+
+
 Regle *initBC(Regle *bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles de symptomes=>maladie
 
     Regle *grippe = creerRegle();
     char* symptomeGrippe[4] = {"FIEVRE", "TOUX", "FATIGUE", "COURBATURE"};
-    for (int i=0; i<4; i++) {
+    insertiondsr(4,symptomeGrippe,grippe,"grippe");
+   /* for (int i=0; i<4; i++) {
         grippe->premier = ajouteEnQueRec(grippe->premier, symptomeGrippe[i]);
-    }
-    creerConclusion(grippe->premier, "grippe");
+    }*/
+  //  creerConclusion(grippe->premier, "grippe");
 
     Regle *angine = creerRegle();
     char* symptomeAngine[4] = {"FIEVRE", "TOUX", "MAL DE GORGE", "FATIGUE"};
-    for (int i=0; i<4; i++) {
+    /*for (int i=0; i<4; i++) {
         angine->premier = ajouteEnQueRec(angine->premier, symptomeAngine[i]);
     }
-    creerConclusion(angine->premier, "angine");
+    creerConclusion(angine->premier, "angine");*/
+    insertiondsr(4,symptomeAngine,angine,"angine");
 
     Regle *covid19 = creerRegle();
     char* symptomeCovid19[4] = {"FIEVRE", "TOUX", "PERTE DE GOUT", "PERTE D'ODORAT"};
-    for (int i=0; i<4; i++) {
+    /*for (int i=0; i<4; i++) {
         angine->premier = ajouteEnQueRec(covid19->premier, symptomeCovid19[i]);
     }
-    creerConclusion(covid19->premier, "covid19");
+    creerConclusion(covid19->premier, "covid19");*/
+    insertiondsr(4,symptomeCovid19,covid19,"covid19");
 
    // afficherRegle(grippe); // à enlever c'était pour test
   //  afficherRegle(angine); // à enlever c'était pour test
