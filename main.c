@@ -46,10 +46,10 @@ int main() {
     printf("\nTest de la BC:\n");
 
     BC bc = creerBC();
-    initBC(bc);
+    bc=initBC(bc);
 
     afficherRegle(bc);
-
+printf("teste");
   //  Regle *test2;
   //  test2 = creerRegle("toux");
   //  test2->premier = ajouteEnQueRec(test2->premier, "B");

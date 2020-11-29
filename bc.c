@@ -16,7 +16,7 @@ BC creerBC(){
     return bc;
 }
 
-void initBC(BC bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles de symptomes=>maladie
+Regle *initBC(Regle *bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles de symptomes=>maladie
 
     Regle *grippe = creerRegle();
     char* symptomeGrippe[4] = {"FIEVRE", "TOUX", "FATIGUE", "COURBATURE"};
@@ -39,14 +39,14 @@ void initBC(BC bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles
     }
     creerConclusion(covid19->premier, "covid19");
 
-    afficherRegle(grippe); // à enlever c'était pour test
-    afficherRegle(angine); // à enlever c'était pour test
+   // afficherRegle(grippe); // à enlever c'était pour test
+  //  afficherRegle(angine); // à enlever c'était pour test
 
 
     bc = ajouteEnQueBc(bc , grippe->premier);
     bc = ajouteEnQueBc(bc , angine->premier);
     bc = ajouteEnQueBc(bc , covid19->premier);
-
+return (bc);
 
 
 }
@@ -72,15 +72,13 @@ void initBC(BC bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles
 Regle * ajouteEnQueBc(Regle* bc,  Proposition *regle) { //Ajoute récursivement une proposition en queue
 
 
-    if (bc   == NULL || bc->premier->valeur=="\0") {
-        printf("bc est null\n");
+    if (bc == NULL || bc->premier->valeur[0] =='\0' ) {
         Regle *nouveau = malloc(sizeof(*nouveau));
         nouveau->premier = regle;
         nouveau->suivant = NULL;
 
         return nouveau;
     }
-    printf("bc est passsssssss null\n");
 
     bc->suivant = ajouteEnQueBc(bc->suivant, regle);
 

@@ -9,7 +9,7 @@ Regle *renvoitetebc(BC bc);
 BC creerBC();
 BC *restebc(BC bc);
 
-void initBC(BC);
+Regle *initBC(Regle* bc);
 
 
 

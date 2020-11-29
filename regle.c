@@ -40,7 +40,7 @@ Proposition *ajouteEnTete(Regle *regle, char* nvProp) {
 Proposition *ajouteEnQueRec(Proposition *regle, char* nvProp) { //Ajoute récursivement une proposition en queue
 
 
-    if (regle == NULL || regle->valeur=="\0") {
+    if (regle == NULL || regle->valeur[0]=='\0') {
 
         Proposition *nouveau = malloc(sizeof(*nouveau));
        // nouveau->valeur = nvProp;
@@ -101,15 +101,23 @@ void afficherRegle(Regle *regle)
     {
         exit(EXIT_FAILURE);
     }
+    if(regle->premier==NULL){
 
+    }else{
+    if ( regle->premier->suivant==NULL){
+        printf("cette regle est incomplete ( une seul donnee: %s)\n",regle->premier->valeur);
+    }else
+        {
     Proposition *actuel = regle->premier;
-
-    while (actuel != NULL)
+    printf("voici la premisse : \n");
+    while (actuel->suivant != NULL)
     {
         printf("%s -> ", actuel->valeur);
         actuel = actuel->suivant;
     }
-    printf("NULL\n");
+    printf("\n conclusion : %s \n\n",actuel->valeur);
+    }
+    }
 }
 
 // wtf elle marche cette fonction, elle renvoie 0 pour la liste test
