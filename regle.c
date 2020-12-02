@@ -12,19 +12,21 @@ Regle *creerRegle() {
         exit(EXIT_FAILURE);
     }
 
-    strcpy(proposition->valeur, "\0");
+    proposition->valeur[0]=0;
  //   proposition->valeur = "\0";
     proposition->suivant = NULL;
     regle->premier = proposition;
-
+    regle->conclusion=NULL;
     return regle;
 }
 
-void *creerConclusion(Proposition *regle, char* vConclu) { // Créer la conclusion d'une règle
+Regle *creerConclusion(Regle *regle, char* vConclu) { // Créer la conclusion d'une règle
     Proposition *conclusion = malloc(sizeof(Proposition));
     strcpy(conclusion->valeur, vConclu);
+
     conclusion->suivant = NULL;
-    ajouteEnQueRec(regle, conclusion->valeur);
+    regle->conclusion=conclusion;
+    return regle;
 }
 
 Proposition *ajouteEnTete(Regle *regle, char* nvProp) {
@@ -110,12 +112,12 @@ void afficherRegle(Regle *regle)
         {
     Proposition *actuel = regle->premier;
     printf("voici la premisse : \n");
-    while (actuel->suivant != NULL)
+    while (actuel != NULL)
     {
         printf("%s -> ", actuel->valeur);
         actuel = actuel->suivant;
     }
-    printf("\n conclusion : %s \n\n",actuel->valeur);
+    printf("\n conclusion : %s \n\n",regle->conclusion->valeur);
     }
     }
 }

@@ -22,7 +22,7 @@ typedef struct regle
 }Regle;
 
 Regle *creerRegle();
-void *creerConclusion(Proposition *, char*);
+Regle *creerConclusion(Regle *, char*);
 
 Proposition *ajouteEnTete(Regle*, char*);
 Proposition *ajouteEnQueRec(Proposition*, char*);

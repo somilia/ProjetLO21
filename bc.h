@@ -4,11 +4,11 @@
 
 
 typedef Regle* BC;
-Regle *ajouteEnQueBc(Regle* bc,  Proposition *regle);
+BC ajouteEnQueBc(Regle* bc,  Regle *regle);
 Regle *renvoitetebc(BC bc);
 BC creerBC();
 BC *restebc(BC bc);
-Regle *initBC(Regle* bc);
+BC initBC(BC bc);
 
 Regle *insertiondsr(int max ,char* tableau[],Regle *regle,char* conclucion);
 

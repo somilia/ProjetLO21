@@ -20,12 +20,12 @@ Regle* insertiondsr(int max ,char* tableau[],Regle *regle,char* conclusion){
     for(int i=0;i<max;i++){
         regle->premier=ajouteEnQueRec(regle->premier,tableau[i]);
     }
-    creerConclusion(regle->premier, conclusion);
+    regle=creerConclusion(regle, conclusion);
     return regle;
 }
 
 
-Regle *initBC(Regle *bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles de symptomes=>maladie
+BC initBC(BC bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles de symptomes=>maladie
 
     Regle *grippe = creerRegle();
     char* symptomeGrippe[4] = {"FIEVRE", "TOUX", "FATIGUE", "COURBATURE"};
@@ -54,11 +54,11 @@ Regle *initBC(Regle *bc){ // Initialise la BC "Maladie" en ajoutant toutes les r
    // afficherRegle(grippe); // à enlever c'était pour test
   //  afficherRegle(angine); // à enlever c'était pour test
 
+    bc = ajouteEnQueBc(bc , grippe);
 
-    bc = ajouteEnQueBc(bc , grippe->premier);
-    bc = ajouteEnQueBc(bc , angine->premier);
-    bc = ajouteEnQueBc(bc , covid19->premier);
-return (bc);
+    bc = ajouteEnQueBc(bc , angine);
+    bc = ajouteEnQueBc(bc , covid19);
+return bc;
 
 
 }
@@ -81,18 +81,26 @@ return (bc);
 
 }*/
 
-Regle * ajouteEnQueBc(Regle* bc,  Proposition *regle) { //Ajoute récursivement une proposition en queue
+BC ajouteEnQueBc(BC bc,  Regle *regle) { //Ajoute récursivement une proposition en queue
 
 
-    if (bc == NULL || bc->premier->valeur[0] =='\0' ) {
-        Regle *nouveau = malloc(sizeof(*nouveau));
-        nouveau->premier = regle;
-        nouveau->suivant = NULL;
+    if (bc != NULL ) {
+        if(bc->premier->valeur[0]!=0){
+            bc->suivant = ajouteEnQueBc(bc->suivant, regle);
 
-        return nouveau;
+        }
+        else{
+            bc=regle;
+
+            return bc;
+        }}
+    else{
+            bc=regle;
+
+            return bc;
     }
 
-    bc->suivant = ajouteEnQueBc(bc->suivant, regle);
+
 
     return bc;
 
