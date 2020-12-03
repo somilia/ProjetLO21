@@ -4,6 +4,7 @@
 #include <string.h>
 #include "consulter.h"
 
+
 #include "regle.h"
 #include "bc.h"
 
@@ -58,6 +59,7 @@ printf("teste");
   //  bc = ajouteEnQueBc(bc , test2->premier);
   //  test2=renvoitetebc(bc);
   consulterlisteRegle(bc,0);
+     consulterreglechoisi("grippe", bc);
 
     return 0;
 }

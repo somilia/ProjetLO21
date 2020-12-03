@@ -8,10 +8,12 @@
 #include <stdbool.h>
 #include <string.h>
 #include "regle.h"
+#include "consulter.h"
 
 
 void initialisation(){
     int choix=0;
+    BC bc=creerBC();
     while(choix<1 || choix>6) {
         printf("*************Bienvenue****************");
         printf("\n\n\nque voulez vous faire : \n");
@@ -31,8 +33,8 @@ void initialisation(){
 
             break;
         case 3:
-
-        break;
+            lirereglechoisis(bc);
+            break;
         case 4:
 
             break;

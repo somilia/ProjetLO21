@@ -7,5 +7,8 @@
 #include "bc.h"
 
 void consulterlisteRegle(BC bc,int compt);
+void consulterreglechoisi(char nom[], BC bc);
+void nomreglerechercher(char nomregle[]);
+void lirereglechoisis(BC bc);
 
 #endif //PROJETLO21_CONSULTER_H
