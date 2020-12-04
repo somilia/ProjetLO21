@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "consulter.h"
+#include "BF.h"
 
 
 #include "regle.h"
@@ -10,7 +11,7 @@
 
 int main() {
 
-    Regle *test;
+  /*  Regle *test;
     test = creerRegle("fievre");
     afficherRegle(test);
 
@@ -60,6 +61,14 @@ printf("teste");
   //  test2=renvoitetebc(bc);
   consulterlisteRegle(bc,0);
      consulterreglechoisi("grippe", bc);
+*/
+    BF bf=malloc(sizeof(BF));
+    bf->valeur[0]=0;
+    bf=ajoutBf(bf);
+    ajouteEnQueRec(bf,"zizi");
+    consulterBf(bf);
+    bf=suppBf(bf);
 
+    consulterBf(bf);
     return 0;
 }

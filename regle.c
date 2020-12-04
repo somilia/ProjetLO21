@@ -103,7 +103,7 @@ void afficherRegle(Regle *regle)
     {
         exit(EXIT_FAILURE);
     }
-    if(regle->premier==NULL){
+    if(regle->premier==NULL){       //euuuu a vérifier ca
 
     }else{
     if ( regle->premier->suivant==NULL){
