@@ -9,20 +9,24 @@
 #include <string.h>
 #include "regle.h"
 #include "consulter.h"
-
-
+#include "BF.h"
 void initialisation(){
-    int choix=0;
     BC bc=creerBC();
+    BF bf=creerBf();
+    menuprincipale(bc,bf);
+}
+void menuprincipale(BC bc,BF bf){
+    int choix=0;
+
     while(choix<1 || choix>6) {
         printf("*************Bienvenue****************");
         printf("\n\n\nque voulez vous faire : \n");
-        printf("1) ajouter une base de connaissance");
-        printf("2) creer une base de faits");
-        printf("3) lire une regle");
-        printf("4)lire une base de faits");
-        printf("5)tester une base de faits");
-        printf("6)quitter");
+        printf("1) ajouter une base de connaissance\n");
+        printf("2) menu base de faits\n");
+        printf("3) lire une regle\n");
+        printf("4)lire une base de faits\n");
+        printf("5)tester une base de faits\n");
+        printf("6)quitter\n");
         scanf("%d", &choix);
     }
     switch (choix){
@@ -30,7 +34,7 @@ void initialisation(){
 
             break;
         case 2:
-
+            menuBf(bc,bf);
             break;
         case 3:
             lirereglechoisis(bc);

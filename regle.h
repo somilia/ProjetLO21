@@ -25,7 +25,7 @@ Regle *creerRegle();
 Regle *creerConclusion(Regle *, char*);
 
 Proposition *ajouteEnTete(Regle*, char*);
-Proposition *ajouteEnQueRec(Proposition*, char*);
+Proposition *ajouteEnQueRec(Proposition*, char tab[]);
 
 Regle *suppressionTeteRec(Regle*);
 Regle *suppressionRec(Regle *, char*);

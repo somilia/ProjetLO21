@@ -39,7 +39,7 @@ Proposition *ajouteEnTete(Regle *regle, char* nvProp) {
 }
 
 
-Proposition *ajouteEnQueRec(Proposition *regle, char* nvProp) { //Ajoute récursivement une proposition en queue
+Proposition *ajouteEnQueRec(Proposition *regle, char nvProp[]) { //Ajoute récursivement une proposition en queue
 
 
     if (regle == NULL || regle->valeur[0]=='\0') {

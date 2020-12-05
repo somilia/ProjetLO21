@@ -4,6 +4,7 @@
 #include <string.h>
 #include "consulter.h"
 #include "BF.h"
+#include "menu.h"
 
 
 #include "regle.h"
@@ -62,13 +63,16 @@ printf("teste");
   consulterlisteRegle(bc,0);
      consulterreglechoisi("grippe", bc);
 */
-    BF bf=malloc(sizeof(BF));
+    /*BF bf=malloc(sizeof(*bf));
     bf->valeur[0]=0;
-    bf=ajoutBf(bf);
-    ajouteEnQueRec(bf,"zizi");
+    //bf=ajoutBf(bf);
+   bf= ajouteEnQueRec(bf,"zizi");
+    bf=ajouteEnQueRec(bf,"lour");
+    bf=ajouteEnQueRec(bf,"cassee");
     consulterBf(bf);
-    bf=suppBf(bf);
+    bf=suppressionfait(bf,"lour");
 
-    consulterBf(bf);
+    consulterBf(bf);*/
+    initialisation();
     return 0;
 }
