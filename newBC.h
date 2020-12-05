@@ -5,6 +5,7 @@
 #ifndef PROJETLO21_NEWBC_H
 #define PROJETLO21_NEWBC_H
 #include "bc.h"
+#include "allstructure.h"
 BC bctemplate(BC bc);
 BC BCmaladie(BC bc);
 

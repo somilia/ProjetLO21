@@ -1,7 +1,10 @@
 //
 // Created by denis on 02/12/2020.
 //
-
+#include "bc.h"
+#include "regle.h"
+#include "BF.h"
+#include "menu.h"
 #include "menu.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +13,7 @@
 #include "regle.h"
 #include "consulter.h"
 #include "BF.h"
+#include "allstructure.h"
 void initialisation(){
     BC bc=creerBC();
     BF bf=creerBf();
@@ -30,7 +34,7 @@ void menuprincipale(BC bc,BF bf){
     }
     switch (choix){
         case 1 :
-
+            menuBC(bc,bf);
             break;
         case 2:
             menuBf(bc,bf);

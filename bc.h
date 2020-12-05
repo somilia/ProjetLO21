@@ -3,8 +3,9 @@
 #include "regle.h"
 #include "BF.h"
 #include "newBC.h"
+#include "allstructure.h"
 
-typedef Regle* BC;
+
 BC ajouteEnQueBc(Regle* bc,  Regle *regle);
 Regle *renvoitetebc(BC bc);
 BC creerBC();

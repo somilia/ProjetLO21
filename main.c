@@ -5,11 +5,14 @@
 #include "consulter.h"
 #include "BF.h"
 #include "menu.h"
-
+#include "bc.h"
+#include "regle.h"
+#include "BF.h"
+#include "menu.h"
 
 #include "regle.h"
 #include "bc.h"
-
+#include "allstructure.h"
 int main() {
 
   /*  Regle *test;

@@ -10,8 +10,12 @@
 #include <string.h>
 #include "regle.h"
 #include "consulter.h"
-
 #include "bc.h"
+#include "regle.h"
+#include "BF.h"
+#include "menu.h"
+#include "bc.h"
+#include "allstructure.h"
 BC bctemplate(BC bc){
     int choix=0;
     while(choix<1 || choix >5){

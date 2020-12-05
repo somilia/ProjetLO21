@@ -10,7 +10,11 @@
 #include "consulter.h"
 #include <ctype.h>
 #include "bc.h"
-
+#include "bc.h"
+#include "regle.h"
+#include "BF.h"
+#include "menu.h"
+#include "allstructure.h"
 void nomreglerechercher(char nomregle[]){//permet à l'utilisateur d'entrer le nom de la regle qu'il cherche
 
     printf("entrez le nom de la regle que vous voulez voir");

@@ -1,6 +1,8 @@
 #include "bc.h"
 #include "regle.h"
 #include "BF.h"
+#include "menu.h"
+#include "allstructure.h"
 #include "newBC.h"
 void menuBC(BC bc, BF bf){
     int choix = 0;

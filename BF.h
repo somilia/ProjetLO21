@@ -6,11 +6,10 @@
 #define PROJETLO21_BF_H
 #include "regle.h"
 #include "bc.h"
+#include "allstructure.h"
 
-typedef Proposition* BF;
+
 void conitnuer();
-
-BF creationBf();
 void menuBf(BC bc, BF bf);
 void consulterBf(BF bf);
 BF ajoutBf(BF bf);

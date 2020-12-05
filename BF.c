@@ -12,6 +12,11 @@
 #include "regle.h"
 #include "consulter.h"
 #include <ctype.h>
+#include "bc.h"
+#include "regle.h"
+#include "BF.h"
+#include "menu.h"
+#include "allstructure.h"
 void menuBf(BC bc,BF bf) {
     int choix = 0;
     int conf = 0;

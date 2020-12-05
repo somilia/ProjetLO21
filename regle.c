@@ -3,7 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include "regle.h"
-
+#include "bc.h"
+#include "regle.h"
+#include "BF.h"
+#include "allstructure.h"
+#include "menu.h"
 Regle *creerRegle() {
     Regle *regle = malloc(sizeof(Regle));
     Proposition *proposition = malloc(sizeof(Proposition));

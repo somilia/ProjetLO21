@@ -4,22 +4,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "allstructure.h"
 
+#include "allstructure.h"
 
-
-typedef struct proposition
-{
-    char valeur[20];
-    struct proposition* suivant;
-}Proposition;
-
-//typedef Proposition* Regle;
-typedef struct regle
-{
-    Proposition * premier;
-    Proposition * conclusion;
-    struct regle* suivant;
-}Regle;
 
 Regle *creerRegle();
 Regle *creerConclusion(Regle *, char*);
