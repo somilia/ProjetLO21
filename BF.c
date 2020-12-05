@@ -12,7 +12,7 @@
 #include "regle.h"
 #include "consulter.h"
 #include <ctype.h>
-BF menuBf(BC bc,BF bf) {
+void menuBf(BC bc,BF bf) {
     int choix = 0;
     int conf = 0;
     while (choix != 5) {

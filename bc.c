@@ -1,6 +1,95 @@
 #include "bc.h"
 #include "regle.h"
+#include "BF.h"
+#include "newBC.h"
+void menuBC(BC bc, BF bf){
+    int choix = 0;
+    int conf = 0;
+    while (choix != 6) {
+        system("cls");
+        printf("Que voulez vous faire?\n\n");
+        printf("1) consulter l'ensemble de la base\n");
+        printf("2) ajouter une regle\n");
+        printf("3) consulter une regle\n");
+        printf("4) suprimer une regle\n");
+        printf("5) aajouter une base template\n");
+        printf("6) retour menu principale");
+        scanf("%d", &choix);
 
+        switch (choix) {
+
+            case 1 :
+                consultertoutelaBC(bc);
+                conitnuer();
+                break;
+            case 2:
+                bc= ajoutregleBC(bc);
+
+                conitnuer();
+
+                break;
+            case 3:
+                conf = confirmation();
+                if (conf == 1) {
+                    bf = suppBf(bf);
+                }
+                conitnuer();
+
+                break;
+            case 4:
+
+                conitnuer();
+
+                break;
+
+            case 5:
+                bc=bctemplate(bc);
+                break;
+                case 6:
+                    menuprincipale(bc, bf);
+
+                     break;
+            default:
+                printf("entrer un choix valide");
+                conitnuer();
+
+                break;
+        }
+    }
+
+
+
+}
+
+
+BC ajoutregleBC(BC bc){
+    char propo[20]={'\0'};
+    Regle *regle=creerRegle(regle);
+    int choix=1;
+    while(choix==1) {
+        printf("ajouter un Proposition de la presmisse:\n");
+        scanf("%s", propo);             //verifier si propo est réinitialisé automatiquement sinon risque de bug
+        regle->premier = ajouteEnQueRec(regle->premier, propo);
+        printf("continuer la prémisse ? si oui appuyer sur 1\n");
+        scanf("%d",&choix);
+    }
+    printf("entrer votre conslusion\n");
+    scanf("%s",propo);
+    regle=creerConclusion(regle,propo);
+   bc= ajouteEnQueBc(bc,regle);
+   return bc;
+}
+
+BC consultertoutelaBC(BC bc) {
+    if (bc == NULL) {
+        printf("\nfin\n");
+    }else{
+
+
+        afficherRegle(bc);
+       consultertoutelaBC(bc->suivant);
+    }
+}
 
 BC creerBC(){
 

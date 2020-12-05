@@ -11,7 +11,7 @@ typedef Proposition* BF;
 void conitnuer();
 
 BF creationBf();
-BF menuBf(BC bc, BF bf);
+void menuBf(BC bc, BF bf);
 void consulterBf(BF bf);
 BF ajoutBf(BF bf);
 BF suppBf(BF bf);

@@ -21,11 +21,10 @@ void menuprincipale(BC bc,BF bf){
     while(choix<1 || choix>6) {
         printf("*************Bienvenue****************");
         printf("\n\n\nque voulez vous faire : \n");
-        printf("1) ajouter une base de connaissance\n");
+        printf("1) menu base de connaissance\n");
         printf("2) menu base de faits\n");
         printf("3) lire une regle\n");
-        printf("4)lire une base de faits\n");
-        printf("5)tester une base de faits\n");
+        printf("5)tester base de faits\n");
         printf("6)quitter\n");
         scanf("%d", &choix);
     }
