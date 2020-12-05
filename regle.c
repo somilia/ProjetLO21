@@ -16,7 +16,7 @@ Regle *creerRegle() {
         exit(EXIT_FAILURE);
     }
 
-    proposition->valeur[0]=0;
+    proposition->valeur[0]='a';
  //   proposition->valeur = "\0";
     proposition->suivant = NULL;
     regle->premier = proposition;
@@ -46,7 +46,7 @@ Proposition *ajouteEnTete(Regle *regle, char* nvProp) {
 Proposition *ajouteEnQueRec(Proposition *regle, char nvProp[]) { //Ajoute récursivement une proposition en queue
 
 
-    if (regle == NULL || regle->valeur[0]=='\0') {
+    if (regle == NULL || regle->valeur[0]=='a') {
 
         Proposition *nouveau = malloc(sizeof(*nouveau));
        // nouveau->valeur = nvProp;

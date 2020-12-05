@@ -112,6 +112,7 @@ Regle* insertiondsr(int max ,char* tableau[],Regle *regle,char* conclusion){
         regle->premier=ajouteEnQueRec(regle->premier,tableau[i]);
     }
     regle=creerConclusion(regle, conclusion);
+    regle->suivant=NULL;
     return regle;
 }
 
@@ -173,27 +174,27 @@ return bc;
 }*/
 
 BC ajouteEnQueBc(BC bc,  Regle *regle) { //Ajoute récursivement une proposition en queue
-
-
-    if (bc != NULL ) {
-        if(bc->premier->valeur[0]!=0){
-            bc->suivant = ajouteEnQueBc(bc->suivant, regle);
-
-        }
-        else{
-            bc=regle;
-
-            return bc;
-        }}
-    else{
-            bc=regle;
-
-            return bc;
-    }
-
-
+if(bc==NULL){
+    printf("wsh3");
+    bc=regle;
 
     return bc;
+}else{
+    if(bc->premier->valeur[0]=='a'){
+        bc=regle;
+    printf("wsh2");
+        return bc;
+    }else{
+        printf("wsh");
+        bc->suivant = ajouteEnQueBc(bc->suivant, regle);
+        return bc;
+    }
+}
+
+
+
+
+
 
 }
 
