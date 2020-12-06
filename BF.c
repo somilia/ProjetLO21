@@ -33,15 +33,21 @@ void menuBf(BC bc,BF bf) {
         switch (choix) {
 
             case 1 :
+                system("cls");
+
                 consulterBf(bf);
                 conitnuer();
                 break;
             case 2:
+                system("cls");
+
                 bf = ajoutBf(bf);
                 conitnuer();
 
                 break;
             case 3:
+                system("cls");
+
                 conf = confirmation();
                 if (conf == 1) {
                     bf = suppBf(bf);
@@ -50,12 +56,16 @@ void menuBf(BC bc,BF bf) {
 
                 break;
             case 4:
+                system("cls");
+
                 bf = suppFait(bf);
                 conitnuer();
 
                 break;
 
             case 5:
+                system("cls");
+
                 menuprincipale(bc, bf);
                 break;
                 /* case 6:
@@ -88,7 +98,7 @@ BF creerBf(){
 void conitnuer(){
         int compt=0;
     while(compt==0) {
-        printf("appuyer sur 1 pour continuer\n");
+        printf("\nappuyer sur 1 pour continuer\n");
         scanf("%d",&compt);
 
     }
@@ -112,11 +122,12 @@ BF suppressionfait(BF bf,char fait[]){
 
     if(bf==NULL){
         printf("Cette element n'est pas dans la base\n");
+
         return bf;
     }else{
-        if(strcmp(bf->suivant->valeur,fait)==0){
+        if(strcmp(bf->valeur,fait)==0){
             Proposition *tempo=bf->suivant;
-            bf->suivant=bf->suivant->suivant;
+            bf=bf->suivant;
             free(tempo);
             printf("fait");
             char compt='\0';

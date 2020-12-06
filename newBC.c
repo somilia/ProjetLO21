@@ -59,9 +59,9 @@ BC BCmaladie(BC bc){
 
 
     bc = ajouteEnQueBc(bc , grippe);
-   printf("fait");
+
     bc = ajouteEnQueBc(bc , angine);
     bc = ajouteEnQueBc(bc , covid19);
-    printf("fait");
+
     return bc;
 }

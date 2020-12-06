@@ -22,16 +22,17 @@ void initialisation(){
 void menuprincipale(BC bc,BF bf){
     int choix=0;
 
-    while(choix<1 || choix>6) {
+    while(choix!=6) {
+        system("cls");
         printf("*************Bienvenue****************");
         printf("\n\n\nque voulez vous faire : \n");
         printf("1) menu base de connaissance\n");
         printf("2) menu base de faits\n");
         printf("3) lire une regle\n");
-        printf("5)tester base de faits\n");
-        printf("6)quitter\n");
+        printf("5) tester base de faits\n");
+        printf("6) quitter\n");
         scanf("%d", &choix);
-    }
+
     switch (choix){
         case 1 :
             menuBC(bc,bf);
@@ -40,7 +41,9 @@ void menuprincipale(BC bc,BF bf){
             menuBf(bc,bf);
             break;
         case 3:
-            lirereglechoisis(bc);
+            system("cls");
+            consulter_bc_regle(bc);
+            conitnuer();
             break;
         case 4:
 
@@ -54,7 +57,7 @@ void menuprincipale(BC bc,BF bf){
             break;
 
     }
-
+}
 
 
 

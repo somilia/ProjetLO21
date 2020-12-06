@@ -19,8 +19,9 @@ Regle *creerRegle() {
     proposition->valeur[0]='a';
  //   proposition->valeur = "\0";
     proposition->suivant = NULL;
-    regle->premier = proposition;
+    //regle->premier = proposition;
     regle->conclusion=NULL;
+    regle->suivant=NULL;
     return regle;
 }
 

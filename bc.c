@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "allstructure.h"
 #include "newBC.h"
+#include <ctype.h>
 void menuBC(BC bc, BF bf){
     int choix = 0;
     int conf = 0;
@@ -14,41 +15,51 @@ void menuBC(BC bc, BF bf){
         printf("2) ajouter une regle\n");
         printf("3) consulter une regle\n");
         printf("4) suprimer une regle\n");
-        printf("5) aajouter une base template\n");
+        printf("5) ajouter une base template\n");
         printf("6) retour menu principale");
         scanf("%d", &choix);
 
         switch (choix) {
 
             case 1 :
+                system("cls");
+
                 consultertoutelaBC(bc);
                 conitnuer();
                 break;
             case 2:
+                system("cls");
+
                 bc= ajoutregleBC(bc);
 
                 conitnuer();
 
                 break;
             case 3:
-                conf = confirmation();
-                if (conf == 1) {
-                    bf = suppBf(bf);
-                }
+                system("cls");
+
+                consulter_bc_regle(bc);
+
                 conitnuer();
 
                 break;
             case 4:
+                system("cls");
 
+                bc=supp_bc_regle(bc);
                 conitnuer();
 
                 break;
 
             case 5:
+                system("cls");
+
                 bc=bctemplate(bc);
                 break;
                 case 6:
-                    menuprincipale(bc, bf);
+                    system("cls");
+
+                menuprincipale(bc, bf);
 
                      break;
             default:
@@ -63,6 +74,62 @@ void menuBC(BC bc, BF bf){
 
 }
 
+BC supp_bc_regle(BC bc){
+    char conclu[20];
+    printf("entrer la conclusion de la regle que vous voulez supprimer");
+    scanf("%s",conclu);
+    for(int i=0;i<strlen(conclu);i++){
+        conclu[i]=tolower(conclu[i]);
+    }
+    bc=searchconclu_delete(bc,conclu);
+    return bc;
+}
+
+BC searchconclu_delete(BC bc,char conclu[]){
+    if(bc==NULL){
+        printf("Cette conclusion n'est pas dans la base\n");
+
+        return bc;
+    }else{
+        if(strcmp(bc->conclusion->valeur,conclu)==0){
+            Regle *tempo=bc;
+            bc=bc->suivant;
+            free(tempo);
+            printf("fait");
+            conitnuer();
+            return bc;
+        }else{
+            bc->suivant=searchconclu_delete(bc->suivant,conclu);
+        }
+    }
+}
+
+
+
+void consulter_bc_regle(BC bc){
+    char conclu[20];
+    printf("entrer la conclusion de la regle que vous chercher\n");
+    scanf("%s",conclu);
+    for(int i=0;i<strlen(conclu);i++){
+        conclu[i]=tolower(conclu[i]);
+    }
+    searchconclu_show(bc,conclu);
+}
+BC searchconclu_show(BC bc,char conclu[]){
+    if(bc==NULL || bc->conclusion==NULL){
+        printf("votre conclusion n'existe pas \n");
+    return NULL;
+    }else{
+        if(strcmp(bc->conclusion->valeur,conclu)==0){
+            printf("voici la regle:\n");
+            afficherRegle(bc);
+            return NULL;
+        }else{
+            bc->suivant=searchconclu_show(bc->suivant,conclu);
+            return bc;
+        }
+    }
+}
 
 BC ajoutregleBC(BC bc){
     char propo[20]={'\0'};
@@ -82,14 +149,18 @@ BC ajoutregleBC(BC bc){
    return bc;
 }
 
-BC consultertoutelaBC(BC bc) {
-    if (bc == NULL) {
+void consultertoutelaBC(BC bc) {
+    if (bc == NULL ) {
         printf("\nfin\n");
-    }else{
+    }else {
+        if (bc->premier->valeur[0] == 'a') {
+            printf("\nfin\n");
+        } else {
 
 
-        afficherRegle(bc);
-       consultertoutelaBC(bc->suivant);
+            afficherRegle(bc);
+            consultertoutelaBC(bc->suivant);
+        }
     }
 }
 
@@ -175,17 +246,15 @@ return bc;
 
 BC ajouteEnQueBc(BC bc,  Regle *regle) { //Ajoute récursivement une proposition en queue
 if(bc==NULL){
-    printf("wsh3");
+
     bc=regle;
 
     return bc;
 }else{
     if(bc->premier->valeur[0]=='a'){
         bc=regle;
-    printf("wsh2");
         return bc;
     }else{
-        printf("wsh");
         bc->suivant = ajouteEnQueBc(bc->suivant, regle);
         return bc;
     }
