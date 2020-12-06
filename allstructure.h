@@ -5,6 +5,7 @@
 #ifndef PROJETLO21_ALLSTRUCTURE_H
 #define PROJETLO21_ALLSTRUCTURE_H
 #include "allstructure.h"
+
 typedef struct proposition
 {
     char valeur[20];
