@@ -15,4 +15,8 @@ arbreb creerarbre();
 Regle* inserer_regle_arbre( BC bc,BF bf);
 int corespondace(arbreb arbre,BF bf);
 void afficher(arbreb arbre);
+void comparaison(arbreb arbre,BF bf);
+
+
+
 #endif//PROJETLO21_ARBRE_H

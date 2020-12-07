@@ -56,6 +56,7 @@ void menuBC(BC bc, BF bf){
             case 5:
                 system("cls");
                 afficher(bc->arbre);
+                comparaison(bc->arbre,bf);
                 conitnuer();
                 //bc=bctemplate(bc);
                 break;

@@ -83,70 +83,79 @@ Regle* inserer_regle_arbre( BC bc,BF bf){
      }
 }
 
-int corespondace(arbreb arbre,BF bf){
-    int solution=0;
-if(arbre==NULL) {
-    return 0;
-}
+int corespondace(arbreb arbre,BF bf) {
+    int solution;
+    if (arbre == NULL) {
+        return 0;
+    } else {
+        if (strcmp(bf->valeur, arbre->propo) == 0) {
+            return 1;
 
-else{
-    if(bf->valeur[0]<arbre->propo[0]){
-        solution=corespondace(arbre->fg,bf);
-        return solution;
-    }else{
-        if(bf->valeur[0]>arbre->propo[0]){
-            solution=corespondace(arbre->fd,bf);
-            return solution;
-        }else{
-            if(strcmp(bf->valeur,arbre->propo)==0){
-                return 1;
-            }else{
-                int i=1;//on commence i à un car on a deja tester le premiere element
-                int max1 = strlen(bf->valeur);          // on utilise la fonction strlen ici pour la premire fois car comme c'est une fonction qui va réalisé un certain nombre d'action on attend avant dde l'utiliser pour la premiere fois la reponse du premier teste pour savoir si c'est nécéssaire
-                int max2 = strlen(arbre->propo);
-            while(i<max1 || i<max2 || bf->valeur[i]!=arbre->propo[i]){
-                i++;
-            }
-            if(i==max1 ){
-                solution=corespondace(arbre->fg,bf);
+        } else {
+            if (bf->valeur[0] > arbre->propo[0]) {
+                solution = corespondace(arbre->fd, bf);
                 return solution;
-            }else{
-                if(i==max2){
-                    solution=corespondace(arbre->fd,bf);
+            } else {
+                if (bf->valeur[0] < arbre->propo[0]) {
+                    solution = corespondace(arbre->fg, bf);
                     return solution;
-                }else{
-                    if(bf->valeur[i]<arbre->propo[i]){
-                        solution=corespondace(arbre->fg,bf);
-                        return solution;
-                }else{
-                        if(bf->valeur[i]>arbre->propo[i]){
-                            solution=corespondace(arbre->fd,bf);
-                            return solution;
+                } else {
+                    int i = 1;//on commence i à un car on a deja tester le premiere element
+                    int max1 = strlen(
+                            bf->valeur);          // on utilise la fonction strlen ici pour la premire fois car comme c'est une fonction qui va réalisé un certain nombre d'action on attend avant dde l'utiliser pour la premiere fois la reponse du premier teste pour savoir si c'est nécéssaire
+                    int max2 = strlen(arbre->propo);
+                    while (i < max1 || i < max2 || bf->valeur[i] != arbre->propo[i]) {
+                        i++;
                     }
+                    if (i == max1) {
+                        solution = corespondace(arbre->fg, bf);
+                        return solution;
+                    } else {
+                        if (i == max2) {
+                            solution = corespondace(arbre->fd, bf);
+                            return solution;
+                        } else {
+                            if (bf->valeur[i] < arbre->propo[i]) {
+                                solution = corespondace(arbre->fg, bf);
+                                return solution;
+                            } else {
+                                if (bf->valeur[i] > arbre->propo[i]) {
+                                    solution = corespondace(arbre->fd, bf);
+                                    return solution;
+                                }
+                                return solution;
 
+
+                            }
+                        }
+                    }
                 }
+
             }
-        }
         }
     }
-
-}}}
-
-/*void comparaison(arbreb arbre,BF bf){
-    int compt=0;
+}
+void comparaison(arbreb arbre,BF bf){
+    int compt=5;
     int error=1;
     if(bf!=NULL && arbre!=NULL) {
+
         do {
-            compt = corespondace(arbre, bf);
+            if(corespondace(arbre, bf)==0){
+                error=0;
+                printf("erreur");
+            }
+
             bf = bf->suivant;
 
-        } while (bf != NULL || compt==0);
+        } while ((bf != NULL) );
+        if(error!=0 ){
+            printf("ok bro");
+        }
     }else{
         printf("erreur");
         error=0;
     }
-    if(compt!=0 && error!=0){
-        printf("%s",arbre->);
-    }
 
-}*/
+
+}
