@@ -19,7 +19,7 @@
 #include "testbase.h"
 #include "arbre.h"
 
-BC test_bd_bf(BC bc, BF bf){
+/*BC test_bd_bf(BC bc, BF bf){
     if(bc==NULL){
         printf("inconnu");
         return NULL;
@@ -35,4 +35,4 @@ int corespondance(BC bc, BF bf){
     arbrebc=inserer_regle_arbre(arbrebc,bc->premier);
     arbrebf=inserer_regle_arbre(arbrebf,bf);
 
-}
+}*/

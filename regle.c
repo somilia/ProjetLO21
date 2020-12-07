@@ -8,6 +8,8 @@
 #include "BF.h"
 #include "allstructure.h"
 #include "menu.h"
+#include "arbre.h"
+
 Regle *creerRegle() {
     Regle *regle = malloc(sizeof(Regle));
     Proposition *proposition = malloc(sizeof(Proposition));
@@ -19,9 +21,11 @@ Regle *creerRegle() {
     proposition->valeur[0]='a';
  //   proposition->valeur = "\0";
     proposition->suivant = NULL;
-    //regle->premier = proposition;
+    regle->premier = proposition;
     regle->conclusion=NULL;
     regle->suivant=NULL;
+    regle->arbre=NULL;
+    regle->arbre=creerarbre();
     return regle;
 }
 

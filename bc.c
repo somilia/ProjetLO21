@@ -2,6 +2,8 @@
 #include "regle.h"
 #include "BF.h"
 #include "menu.h"
+#include "arbre.h"
+
 #include "allstructure.h"
 #include "newBC.h"
 #include <ctype.h>
@@ -53,8 +55,9 @@ void menuBC(BC bc, BF bf){
 
             case 5:
                 system("cls");
-
-                bc=bctemplate(bc);
+                afficher(bc->arbre);
+                conitnuer();
+                //bc=bctemplate(bc);
                 break;
                 case 6:
                     system("cls");
@@ -133,13 +136,15 @@ BC searchconclu_show(BC bc,char conclu[]){
 
 BC ajoutregleBC(BC bc){
     char propo[20]={'\0'};
-    Regle *regle=creerRegle(regle);
+    Regle *regle=creerRegle();
     int choix=1;
     while(choix==1) {
         printf("ajouter un Proposition de la presmisse:\n");
         scanf("%s", propo);             //verifier si propo est réinitialisé automatiquement sinon risque de bug
         regle->premier = ajouteEnQueRec(regle->premier, propo);
-        printf("continuer la prémisse ? si oui appuyer sur 1\n");
+
+         regle->arbre=creerarbre_complet(regle->arbre, propo); //!!!!!!!!!!!!!!!!!!!
+            printf("continuer la prémisse ? si oui appuyer sur 1\n");
         scanf("%d",&choix);
     }
     printf("entrer votre conslusion\n");

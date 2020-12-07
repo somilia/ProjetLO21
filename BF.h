@@ -4,8 +4,7 @@
 
 #ifndef PROJETLO21_BF_H
 #define PROJETLO21_BF_H
-#include "regle.h"
-#include "bc.h"
+
 #include "allstructure.h"
 
 
