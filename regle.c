@@ -26,6 +26,7 @@ Regle *creerRegle() {
     regle->suivant=NULL;
     regle->arbre=NULL;
     regle->arbre=creerarbre();
+    regle->nbpropo=0;
     return regle;
 }
 
@@ -46,8 +47,11 @@ Proposition *ajouteEnTete(Regle *regle, char* nvProp) {
     nouveau->suivant=regle->premier;
     return nouveau;
 }
-
-
+Regle *ajouteEnQueRegle(Regle* regle, char prop[]){
+    regle->nbpropo++;
+    regle->premier=ajouteEnQueRec(regle->premier,prop);
+    return regle;
+}
 Proposition *ajouteEnQueRec(Proposition *regle, char nvProp[]) { //Ajoute récursivement une proposition en queue
 
 

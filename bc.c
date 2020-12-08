@@ -55,10 +55,8 @@ void menuBC(BC bc, BF bf){
 
             case 5:
                 system("cls");
-                afficher(bc->arbre);
-                comparaison(bc->arbre,bf);
-                conitnuer();
-                //bc=bctemplate(bc);
+
+                    bc=bctemplate(bc);
                 break;
                 case 6:
                     system("cls");
@@ -142,7 +140,7 @@ BC ajoutregleBC(BC bc){
     while(choix==1) {
         printf("ajouter un Proposition de la presmisse:\n");
         scanf("%s", propo);             //verifier si propo est réinitialisé automatiquement sinon risque de bug
-        regle->premier = ajouteEnQueRec(regle->premier, propo);
+        regle = ajouteEnQueRegle(regle, propo);
 
          regle->arbre=creerarbre_complet(regle->arbre, propo); //!!!!!!!!!!!!!!!!!!!
             printf("continuer la prémisse ? si oui appuyer sur 1\n");
@@ -186,7 +184,8 @@ BC creerBC(){
 
 Regle* insertiondsr(int max ,char* tableau[],Regle *regle,char* conclusion){
     for(int i=0;i<max;i++){
-        regle->premier=ajouteEnQueRec(regle->premier,tableau[i]);
+        regle->arbre=creerarbre_complet(regle->arbre, tableau[i]);
+        regle=ajouteEnQueRegle(regle,tableau[i]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     regle=creerConclusion(regle, conclusion);
     regle->suivant=NULL;

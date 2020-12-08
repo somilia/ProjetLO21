@@ -11,6 +11,7 @@
 
 Regle *creerRegle();
 Regle *creerConclusion(Regle *, char*);
+Regle *ajouteEnQueRegle(Regle* regle, char prop[]);
 
 Proposition *ajouteEnTete(Regle*, char*);
 Proposition *ajouteEnQueRec(Proposition*, char tab[]);

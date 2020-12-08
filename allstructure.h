@@ -28,6 +28,7 @@ typedef struct regle
     Proposition * conclusion;
     struct regle* suivant;
     arbreb arbre;
+    int nbpropo;
 }Regle;
 
 typedef Proposition* BF;

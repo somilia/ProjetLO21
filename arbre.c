@@ -135,27 +135,103 @@ int corespondace(arbreb arbre,BF bf) {
         }
     }
 }
-void comparaison(arbreb arbre,BF bf){
-    int compt=5;
+void comparaison_bc_bf_parielle(BC bc, BF bf){  // il ne faut pas tous les symptome de la bc mais juste que tous ceux de la bf soit dedans
+    if(bc==NULL){                                  // affiche toutes les maladie propbable
+
+    }else{
+    if( comparaison(bc->arbre,bf)==1){
+        printf("la conclusion peut etre %s\n",bc->conclusion->valeur);
+        comparaison_bc_bf_parielle(bc->suivant,bf);
+
+    }else{
+        comparaison_bc_bf_parielle(bc->suivant,bf);
+    }
+    }
+
+}
+
+void comparaison_bc_bf_strict(BC bc, BF bf){
+    if(bc==NULL){
+
+    }else{
+        if( comparaison_absolue(bc,bf)==1){
+            printf("la conclusion peut etre %s\n",bc->conclusion->valeur);
+            comparaison_bc_bf_parielle(bc->suivant,bf);
+
+        }else{
+            comparaison_bc_bf_parielle(bc->suivant,bf);
+        }
+    }
+}
+
+int comparaison(arbreb arbre,BF bf){
+
     int error=1;
     if(bf!=NULL && arbre!=NULL) {
 
         do {
             if(corespondace(arbre, bf)==0){
                 error=0;
-                printf("erreur");
             }
 
             bf = bf->suivant;
 
-        } while ((bf != NULL) );
+        } while ((bf != NULL) && (error!=0) );
         if(error!=0 ){
-            printf("ok bro");
+            return 1;
         }
     }else{
-        printf("erreur");
-        error=0;
+
+        return 0;
     }
+return 0;
+
+}
+
+int comparaison_absolue(BC bc,BF bf){
+
+    int error=1;
+    if(bf!=NULL ) {
+
+        do {
+            if(corespondace(bc->arbre, bf)==0){
+                error=0;
+            }
+
+            bf = bf->suivant;
+
+        } while ((bf != NULL) && (error!=0) );
+        if(error!=0 && bc->nbpropo==nb_propo_bf(bf,0)){
+            return 1;
+        }
+    }else{
+
+        return 0;
+    }
+    return 0;
+
+}
+int nb_propo_bf(BF bf, int compt){
+
+    if(bf!=NULL){
+
+        compt=nb_propo_bf(bf->suivant,compt+1);
+    }else{
+        return compt;
+    }
+}
 
 
+void menu_comparaison(BC bc,BF bf){
+    int choix=0;
+    while(choix!=1 && choix!=2) {
+        printf("voulez vous une comparaison \n1)strict \n2)large ?\n");
+        printf("une comparaison strict signifie qu'une regle et la base de fait doivent etre complemetement égale\nlarge signifie que il suffit que tous les élément de la base de fait soit dans uen regle");
+        scanf("%d",&choix);
+    }
+    if(choix==1){
+        comparaison_bc_bf_strict(bc,bf);
+    }else{
+        comparaison_bc_bf_parielle(bc,bf);
+    }
 }

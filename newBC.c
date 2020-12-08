@@ -42,18 +42,18 @@ BC bctemplate(BC bc){
 
 
 
-BC BCmaladie(BC bc){
+BC BCmaladie(BC bc){        //en minuscules et un seul mot !
     Regle *grippe = creerRegle();
-    char* symptomeGrippe[4] = {"FIEVRE", "TOUX", "FATIGUE", "COURBATURE"};
+    char* symptomeGrippe[4] = {"fievre", "toux", "fatigue", "courbature"};
     insertiondsr(4,symptomeGrippe,grippe,"grippe");
 
     Regle *angine = creerRegle();
-    char* symptomeAngine[4] = {"FIEVRE", "TOUX", "MAL DE GORGE", "FATIGUE"};
+    char* symptomeAngine[4] = {"fievre", "toux", "mal_de_gorge", "fatigue"};
 
     insertiondsr(4,symptomeAngine,angine,"angine");
 
     Regle *covid19 = creerRegle();
-    char* symptomeCovid19[4] = {"FIEVRE", "TOUX", "PERTE DE GOUT", "PERTE D'ODORAT"};
+    char* symptomeCovid19[4] = {"fievre", "toux", "perte_de_gout", "perte_odorat"};
 
     insertiondsr(4,symptomeCovid19,covid19,"covid19");
 

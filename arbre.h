@@ -15,7 +15,12 @@ arbreb creerarbre();
 Regle* inserer_regle_arbre( BC bc,BF bf);
 int corespondace(arbreb arbre,BF bf);
 void afficher(arbreb arbre);
-void comparaison(arbreb arbre,BF bf);
+int comparaison(arbreb arbre,BF bf);
+void comparaison_bc_bf_parielle(BC bc, BF bf);
+int nb_propo_bf(BF bf, int compt);
+int comparaison_absolue(BC bc,BF bf);
+void comparaison_bc_bf_strict(BC bc, BF bf);
+void menu_comparaison(BC bc,BF bf);
 
 
 

@@ -14,6 +14,8 @@
 #include "consulter.h"
 #include "BF.h"
 #include "allstructure.h"
+#include "arbre.h"
+
 void initialisation(){
     BC bc=creerBC();
     BF bf=creerBf();
@@ -29,7 +31,7 @@ void menuprincipale(BC bc,BF bf){
         printf("1) menu base de connaissance\n");
         printf("2) menu base de faits\n");
         printf("3) lire une regle\n");
-        printf("5) tester base de faits\n");
+        printf("5) tester la base de faits\n");
         printf("6) quitter\n");
         scanf("%d", &choix);
 
@@ -50,9 +52,15 @@ void menuprincipale(BC bc,BF bf){
             break;
 
         case 5:
+            system("cls");
+
+            menu_comparaison(bc,bf);
+            conitnuer();
 
             break;
         case 6:
+        afficher(bc->suivant->arbre);
+            conitnuer();
 
             break;
 
