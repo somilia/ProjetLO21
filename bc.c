@@ -96,6 +96,8 @@ BC searchconclu_delete(BC bc,char conclu[]){
         if(strcmp(bc->conclusion->valeur,conclu)==0){
             Regle *tempo=bc;
             bc=bc->suivant;
+            suprimer_arbre(tempo->arbre);
+            free(tempo->conclusion);
             free(tempo);
             printf("fait");
             conitnuer();
@@ -135,8 +137,16 @@ BC searchconclu_show(BC bc,char conclu[]){
 
 BC ajoutregleBC(BC bc){
     char propo[20]={'\0'};
-    Regle *regle=creerRegle();
+
     int choix=1;
+    printf("entrer votre conslusion\n");
+    scanf("%s",propo);
+    if(verification_conclusion_unique(bc,propo)==0){
+        return bc;
+
+    }else {
+        Regle *regle=creerRegle();
+        regle = creerConclusion(regle, propo);
     while(choix==1) {
         printf("ajouter un Proposition de la presmisse:\n");
         scanf("%s", propo);             //verifier si propo est réinitialisé automatiquement sinon risque de bug
@@ -146,13 +156,25 @@ BC ajoutregleBC(BC bc){
             printf("continuer la prémisse ? si oui appuyer sur 1\n");
         scanf("%d",&choix);
     }
-    printf("entrer votre conslusion\n");
-    scanf("%s",propo);
-    regle=creerConclusion(regle,propo);
-   bc= ajouteEnQueBc(bc,regle);
-   return bc;
-}
 
+
+        bc = ajouteEnQueBc(bc, regle);
+        return bc;
+
+    }}
+int verification_conclusion_unique(BC bc,char conclusion[]){
+
+    if(bc==NULL|| bc->premier->valeur[0]=='a'){
+        return 1;
+    }else{
+        if(strcmp(bc->conclusion->valeur,conclusion)==0){
+            printf("votre conclusion existe déja");
+            return 0;
+        }else{
+           return verification_conclusion_unique(bc->suivant,conclusion);
+        }
+    }
+}
 void consultertoutelaBC(BC bc) {
     if (bc == NULL ) {
         printf("\nfin\n");

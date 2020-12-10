@@ -21,6 +21,7 @@ int nb_propo_bf(BF bf, int compt);
 int comparaison_absolue(BC bc,BF bf);
 void comparaison_bc_bf_strict(BC bc, BF bf);
 void menu_comparaison(BC bc,BF bf);
+void suprimer_arbre(arbreb arbre);
 
 
 

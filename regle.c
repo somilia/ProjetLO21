@@ -119,8 +119,8 @@ void afficherRegle(Regle *regle)
     if(regle->premier==NULL){       //euuuu a vérifier ca
 
     }else{
-    if ( regle->premier->suivant==NULL){
-        printf("cette regle est incomplete ( une seul donnee: %s)\n",regle->premier->valeur);
+    if ( regle->conclusion==NULL){
+        printf("cette regle n'a pas de conclusion");
     }else
         {
     Proposition *actuel = regle->premier;

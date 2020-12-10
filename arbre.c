@@ -17,7 +17,18 @@ arbreb enraciner(arbreb a1,arbreb a2,int e){
     temp->fg=a2;
     return temp;
 }
+void suprimer_arbre(arbreb arbre){
 
+    if(arbre==NULL){
+
+    }else{
+        suprimer_arbre(arbre->fg);
+        suprimer_arbre(arbre->fd);
+        free(arbre);
+    }
+
+
+}
 noeud *creerFeuille(char propo[]){
     noeud *new=malloc(sizeof(noeud));
     new->fd=NULL;

@@ -20,6 +20,7 @@ BC searchconclu_delete(BC bc,char conclu[]);
 BC supp_bc_regle(BC bc);
 
 Regle *insertiondsr(int max ,char* tableau[],Regle *regle,char* conclucion);
+int verification_conclusion_unique(BC bc,char conclusion[]);
 
 
 #endif //PROJETLO21_BC_H
