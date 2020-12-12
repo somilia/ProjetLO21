@@ -164,7 +164,7 @@ BC ajoutregleBC(BC bc){
     }}
 int verification_conclusion_unique(BC bc,char conclusion[]){
 
-    if(bc==NULL|| bc->premier->valeur[0]=='a'){
+    if(bc==NULL|| bc->premier->valeur[0]==' '){
         return 1;
     }else{
         if(strcmp(bc->conclusion->valeur,conclusion)==0){
@@ -179,7 +179,7 @@ void consultertoutelaBC(BC bc) {
     if (bc == NULL ) {
         printf("\nfin\n");
     }else {
-        if (bc->premier->valeur[0] == 'a') {
+        if (bc->premier->valeur[0] == ' ') {
             printf("\nfin\n");
         } else {
 
@@ -278,7 +278,7 @@ if(bc==NULL){
 
     return bc;
 }else{
-    if(bc->premier->valeur[0]=='a'){
+    if(bc->premier->valeur[0]==' '){
         bc=regle;
         return bc;
     }else{

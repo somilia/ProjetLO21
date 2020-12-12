@@ -88,7 +88,7 @@ BF creerBf(){
         exit(EXIT_FAILURE);
     }
 
-    proposition->valeur[0]='a';
+    proposition->valeur[0]=' ';
     //   proposition->valeur = "\0";
     proposition->suivant = NULL;
    bf = proposition;

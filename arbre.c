@@ -12,7 +12,7 @@
 arbreb enraciner(arbreb a1,arbreb a2,int e){
     arbreb temp;
     temp=(noeud*)malloc(sizeof(noeud));
-    temp->propo[0]='a';
+    temp->propo[0]=' ';
     temp->fd=a1;
     temp->fg=a2;
     return temp;
@@ -40,7 +40,7 @@ arbreb creerarbre() {
     noeud *new = malloc(sizeof(noeud));
     new->fd = NULL;
     new->fg = NULL;
-    new->propo[0] = 'a';
+    new->propo[0] = ' ';
     arbreb newarbre = new;
     return newarbre;
 }
@@ -64,7 +64,7 @@ arbreb creerarbre_complet(arbreb arbre, char propo[]){
         return creerFeuille(propo);
 
     }else{
-        if(arbre->propo[0]=='a'){
+        if(arbre->propo[0]==' '){
             return creerFeuille(propo);
 
         }else{
