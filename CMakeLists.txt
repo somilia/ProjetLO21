@@ -3,4 +3,4 @@ project(ProjetLO21 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(ProjetLO21 main.c regle.c regle.h bc.c bc.h menu.c menu.h consulter.c consulter.h newBC.c newBC.h BF.c BF.h allstructure.h testbase.c testbase.h arbre.c arbre.h)
+add_executable(ProjetLO21 main.c regle.c regle.h bc.c bc.h menu.c menu.h consulter.c consulter.h newBC.c newBC.h BF.c BF.h allstructure.h testbase.c testbase.h arbre.c arbre.h fichier.c fichier.h)

@@ -7,7 +7,7 @@
 #include "allstructure.h"
 #include "newBC.h"
 #include <ctype.h>
-void menuBC(BC bc, BF bf){
+void menuBC(BC bc, BF bf,char nom[]){
     int choix = 0;
     int conf = 0;
     while (choix != 6) {
@@ -25,8 +25,11 @@ void menuBC(BC bc, BF bf){
 
             case 1 :
                 system("cls");
+                afficher(bc->arbre);
+                afficher(bc->suivant->arbre);
+                printf("%d %d %d",bc->nbpropo,bc->suivant->nbpropo,bc->suivant->suivant->nbpropo);
 
-                consultertoutelaBC(bc);
+               consultertoutelaBC(bc);
                 conitnuer();
                 break;
             case 2:
@@ -61,7 +64,7 @@ void menuBC(BC bc, BF bf){
                 case 6:
                     system("cls");
 
-                menuprincipale(bc, bf);
+                menuprincipale(bc, bf,nom);
 
                      break;
             default:

@@ -12,7 +12,7 @@ BC creerBC();
 BC *restebc(BC bc);
 BC initBC(BC bc);
 void consultertoutelaBC(BC bc);
-void menuBC(BC bc, BF bf);
+void menuBC(BC bc, BF bf,char nom[]);
 BC ajoutregleBC(BC bc);
 BC searchconclu_show(BC bc,char conclu[]);
 void consulter_bc_regle(BC bc);

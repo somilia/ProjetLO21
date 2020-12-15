@@ -15,16 +15,20 @@
 #include "BF.h"
 #include "allstructure.h"
 #include "arbre.h"
+#include "fichier.h"
 
 void initialisation(){
     BC bc=creerBC();
     BF bf=creerBf();
-    menuprincipale(bc,bf);
+    char nom[20]={0};
+    printf("entrez votre nom");
+    scanf("%s",nom);
+    menuprincipale(bc,bf,nom);
 }
-void menuprincipale(BC bc,BF bf){
+void menuprincipale(BC bc,BF bf,char nom[]){
     int choix=0;
 
-    while(choix!=6) {
+    while(choix!=7) {
         system("cls");
         printf("*************Bienvenue****************");
         printf("\n\n\nque voulez vous faire : \n");
@@ -33,14 +37,14 @@ void menuprincipale(BC bc,BF bf){
         printf("3) lire une regle\n");
         printf("5) tester la base de faits\n");
         printf("6) quitter\n");
-        scanf("%d", &choix);
-
+       scanf("%d", &choix);
+        //choix=4;
     switch (choix){
         case 1 :
-            menuBC(bc,bf);
+            menuBC(bc,bf,nom);
             break;
         case 2:
-            menuBf(bc,bf);
+            menuBf(bc,bf,nom);
             break;
         case 3:
             system("cls");
@@ -48,6 +52,8 @@ void menuprincipale(BC bc,BF bf){
             conitnuer();
             break;
         case 4:
+           // ajout_regle_fichier(bc,"evan");
+            ajout_regle_fichier(bc,"evan");
 
             break;
 
@@ -59,9 +65,7 @@ void menuprincipale(BC bc,BF bf){
 
             break;
         case 6:
-        afficher(bc->suivant->arbre);
-            conitnuer();
-
+           bc= initialisation_creation_bc(bc,"evan");
             break;
 
     }

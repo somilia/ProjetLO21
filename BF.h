@@ -9,7 +9,7 @@
 
 
 void conitnuer();
-void menuBf(BC bc, BF bf);
+void menuBf(BC bc, BF bf,char nom[]);
 void consulterBf(BF bf);
 BF ajoutBf(BF bf);
 BF suppBf(BF bf);

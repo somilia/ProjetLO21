@@ -6,7 +6,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include "arbre.h"
-
+#include <stdio.h>
+#include <conio.h>
 
 
 arbreb enraciner(arbreb a1,arbreb a2,int e){
@@ -49,7 +50,7 @@ void afficher(arbreb arbre){
     if(arbre==NULL){
 
 }else{
-    printf("%s",arbre->propo);
+    printf("%s\n",arbre->propo);
         afficher(arbre->fg);
         afficher(arbre->fd);
 
@@ -72,9 +73,50 @@ arbreb creerarbre_complet(arbreb arbre, char propo[]){
             arbre->fg=creerarbre_complet(arbre->fg,propo);
             return arbre;
         }else{
+            if(propo[0]>arbre->propo[0]){
             arbre->fd=creerarbre_complet(arbre->fd,propo);
             return arbre;
+            }else {
+                int i = 1;//on commence i à un car on a deja tester le premiere element
+                int max1 = strlen(
+                        propo);          // on utilise la fonction strlen ici pour la premire fois car comme c'est une fonction qui va réalisé un certain nombre d'action on attend avant dde l'utiliser pour la premiere fois la reponse du premier teste pour savoir si c'est nécéssaire
+                int max2 = strlen(arbre->propo);
+                while (i < max1 || i < max2 || propo[i] != arbre->propo[i]) {
+                    i++;
+                }
+                if (i == max1) {
+                    arbre->fg=creerarbre_complet(arbre->fg,propo);
+                    return arbre;
+                } else {
+                    if (i == max2) {
+                        arbre->fd=creerarbre_complet(arbre->fd,propo);
+                        return arbre;
+                    } else {
+                        if (propo[i] < arbre->propo[i]) {
+                            arbre->fg=creerarbre_complet(arbre->fg,propo);
+                            return arbre;
+                        } else {
+                            if (propo[i] > arbre->propo[i]) {
+                                arbre->fd=creerarbre_complet(arbre->fd,propo);
+                                return arbre;
+                            }
+
+
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
         }
+
+
         }
     }
 
@@ -167,10 +209,10 @@ void comparaison_bc_bf_strict(BC bc, BF bf){
     }else{
         if( comparaison_absolue(bc,bf)==1){
             printf("la conclusion peut etre %s\n",bc->conclusion->valeur);
-            comparaison_bc_bf_parielle(bc->suivant,bf);
+            comparaison_bc_bf_strict(bc->suivant,bf);
 
         }else{
-            comparaison_bc_bf_parielle(bc->suivant,bf);
+            comparaison_bc_bf_strict(bc->suivant,bf);
         }
     }
 }
@@ -190,17 +232,18 @@ int comparaison(arbreb arbre,BF bf){
         } while ((bf != NULL) && (error!=0) );
         if(error!=0 ){
             return 1;
+        }else{
+            return 0;
         }
     }else{
 
         return 0;
     }
-return 0;
 
 }
 
 int comparaison_absolue(BC bc,BF bf){
-
+    int compt=0;
     int error=1;
     if(bf!=NULL ) {
 
@@ -210,16 +253,18 @@ int comparaison_absolue(BC bc,BF bf){
             }
 
             bf = bf->suivant;
-
+            compt++;
         } while ((bf != NULL) && (error!=0) );
-        if(error!=0 && bc->nbpropo==nb_propo_bf(bf,0)){
+        if(error!=0 && bc->nbpropo==compt){
             return 1;
+        }else{
+            return 0;
+
         }
     }else{
 
         return 0;
     }
-    return 0;
 
 }
 int nb_propo_bf(BF bf, int compt){
@@ -227,7 +272,10 @@ int nb_propo_bf(BF bf, int compt){
     if(bf!=NULL){
 
         compt=nb_propo_bf(bf->suivant,compt+1);
+        printf("%d        ",compt);
+        return compt;
     }else{
+        printf("%d        ",compt);
         return compt;
     }
 }
@@ -245,4 +293,5 @@ void menu_comparaison(BC bc,BF bf){
     }else{
         comparaison_bc_bf_parielle(bc,bf);
     }
+    getch();
 }

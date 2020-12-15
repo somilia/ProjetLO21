@@ -17,7 +17,7 @@
 #include "BF.h"
 #include "menu.h"
 #include "allstructure.h"
-void menuBf(BC bc,BF bf) {
+void menuBf(BC bc,BF bf,char nom[]) {
     int choix = 0;
     int conf = 0;
     while (choix != 5) {
@@ -66,7 +66,7 @@ void menuBf(BC bc,BF bf) {
             case 5:
                 system("cls");
 
-                menuprincipale(bc, bf);
+                menuprincipale(bc, bf,nom);
                 break;
                 /* case 6:
 

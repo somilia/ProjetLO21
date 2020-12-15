@@ -8,6 +8,6 @@
 #include "bc.h"
 #include "allstructure.h"
 void initialisation();
-void menuprincipale(BC bc,BF bf);
+void menuprincipale(BC bc,BF bf,char nom[]);
 
 #endif //PROJETLO21_MENU_H
