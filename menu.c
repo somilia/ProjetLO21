@@ -35,6 +35,8 @@ void menuprincipale(BC bc,BF bf,char nom[]){
         printf("1) menu base de connaissance\n");
         printf("2) menu base de faits\n");
         printf("3) lire une regle\n");
+        printf("4) menu des sauvegardes\n");
+
         printf("5) tester la base de faits\n");
         printf("6) quitter\n");
        scanf("%d", &choix);
@@ -53,7 +55,7 @@ void menuprincipale(BC bc,BF bf,char nom[]){
             break;
         case 4:
            // ajout_regle_fichier(bc,"evan");
-            ajout_regle_fichier(bc,"evan");
+            menusauvegarde(bc,bf,nom);
 
             break;
 
@@ -65,12 +67,37 @@ void menuprincipale(BC bc,BF bf,char nom[]){
 
             break;
         case 6:
-           bc= initialisation_creation_bc(bc,"evan");
+
             break;
 
     }
 }
 
+
+
+}
+
+
+void menusauvegarde(BC bc,BF bf, char nom[]){
+    int choix=0;
+    while(choix != 1 && choix !=2 && choix!=3){
+    printf("que voulez vous faire ?\n");
+    printf("1) recupératiion de donné");
+    printf("2) deposer les donnés");
+    printf("3) retour");
+    scanf("%d",&choix);
+    switch(choix){
+        case 1 : bc= initialisation_creation_bc(bc,nom);
+        break;
+        case 2:
+            ajout_regle_fichier(bc,nom);
+            break;
+        case 3 :
+            menuprincipale(bc,bf,nom);
+break;
+    }}
+    conitnuer();
+    menuprincipale(bc,bf,nom);
 
 
 }

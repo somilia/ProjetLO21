@@ -6,7 +6,7 @@
 #define PROJETLO21_NEWBC_H
 
 #include "allstructure.h"
-
+BC BCfootchampiondumonde(BC bc);
 BC bctemplate(BC bc);
 BC BCmaladie(BC bc);
 
