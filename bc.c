@@ -1,309 +1,236 @@
-#include "bc.h"
-#include "regle.h"
-#include "BF.h"
-#include "menu.h"
-#include "arbre.h"
+#include <ctype.h>
 
 #include "allstructure.h"
-#include "newBC.h"
-#include <ctype.h>
-void menuBC(BC bc, BF bf,char nom[]){
+#include "bc.h"
+#include "regle.h"
+#include "bf.h"
+#include "menu.h"
+#include "arbre.h"
+#include "new_bc.h"
+
+void menu_BC(BC bc, BF bf, char nom[]){
+    
     int choix = 0;
     int conf = 0;
-    while (choix != 6) {
+    while (choix != 6){
         system("cls");
         printf("Que voulez vous faire?\n\n");
-        printf("1) consulter l'ensemble de la base\n");
-        printf("2) ajouter une regle\n");
-        printf("3) consulter une regle\n");
-        printf("4) suprimer une regle\n");
-        printf("5) ajouter une base template\n");
-        printf("6) retour menu principale");
+        printf("1) Consulter l'ensemble de la base\n");
+        printf("2) Ajouter une regle\n");
+        printf("3) Consulter une regle\n");
+        printf("4) Suprimer une regle\n");
+        printf("5) Ajouter une base template\n");
+        printf("6) Retour menu principale");
         scanf("%d", &choix);
 
-        switch (choix) {
+        switch (choix){
 
             case 1 :
                 system("cls");
                 afficher(bc->arbre);
                 afficher(bc->suivant->arbre);
-                printf("%d %d %d",bc->nbpropo,bc->suivant->nbpropo,bc->suivant->suivant->nbpropo);
+                printf("%d %d %d", bc->nbpropo, bc->suivant->nbpropo, bc->suivant->suivant->nbpropo);
+                consulter_toute_la_BC(bc);
+                continuer();
 
-               consultertoutelaBC(bc);
-                conitnuer();
                 break;
             case 2:
                 system("cls");
-
-                bc= ajoutregleBC(bc);
-
-                conitnuer();
+                bc = ajout_regle_BC(bc);
+                continuer();
 
                 break;
             case 3:
                 system("cls");
-
                 consulter_bc_regle(bc);
-
-                conitnuer();
+                continuer();
 
                 break;
             case 4:
                 system("cls");
-
-                bc=supp_bc_regle(bc);
-                conitnuer();
+                bc = supp_bc_regle(bc);
+                continuer();
 
                 break;
 
             case 5:
                 system("cls");
+                bc = bc_template(bc);
 
-                    bc=bctemplate(bc);
                 break;
-                case 6:
-                    system("cls");
+            case 6:
+                system("cls");
+                menu_principale(bc, bf, nom);
 
-                menuprincipale(bc, bf,nom);
-
-                     break;
+                break;
             default:
-                printf("entrer un choix valide");
-                conitnuer();
+                printf("Entrez un choix valide");
+                continuer();
 
                 break;
         }
     }
-
-
-
 }
 
 BC supp_bc_regle(BC bc){
+    
     char conclu[20];
-    printf("entrer la conclusion de la regle que vous voulez supprimer");
-    scanf("%s",conclu);
+    printf("Entrez la conclusion de la regle que vous voulez supprimer");
+    scanf("%s", conclu);
     for(int i=0;i<strlen(conclu);i++){
-        conclu[i]=tolower(conclu[i]);
+        conclu[i] = tolower(conclu[i]);
     }
-    bc=searchconclu_delete(bc,conclu);
+    bc = search_conclu_delete(bc, conclu);
     return bc;
 }
 
-BC searchconclu_delete(BC bc,char conclu[]){
+BC search_conclu_delete(BC bc, char conclu[]){
+    
     if(bc==NULL){
         printf("Cette conclusion n'est pas dans la base\n");
-
         return bc;
     }else{
         if(strcmp(bc->conclusion->valeur,conclu)==0){
             Regle *tempo=bc;
-            bc=bc->suivant;
-            suprimer_arbre(tempo->arbre);
+            bc = bc->suivant;
+            supprimer_arbre(tempo->arbre);
             free(tempo->conclusion);
             free(tempo);
             printf("fait");
-            conitnuer();
+            continuer();
             return bc;
         }else{
-            bc->suivant=searchconclu_delete(bc->suivant,conclu);
+            bc->suivant = search_conclu_delete(bc->suivant, conclu);
         }
     }
 }
 
-
-
 void consulter_bc_regle(BC bc){
+    
     char conclu[20];
-    printf("entrer la conclusion de la regle que vous chercher\n");
+    printf("Entrez la conclusion de la regle que vous cherchez\n");
     scanf("%s",conclu);
     for(int i=0;i<strlen(conclu);i++){
-        conclu[i]=tolower(conclu[i]);
+        conclu[i] = tolower(conclu[i]);
     }
-    searchconclu_show(bc,conclu);
+    search_conclu_show(bc, conclu);
 }
-BC searchconclu_show(BC bc,char conclu[]){
+
+BC search_conclu_show(BC bc, char conclu[]){
+    
     if(bc==NULL || bc->conclusion==NULL){
-        printf("votre conclusion n'existe pas \n");
-    return NULL;
+        printf("Votre conclusion n'existe pas\n");
+        return NULL;
     }else{
-        if(strcmp(bc->conclusion->valeur,conclu)==0){
-            printf("voici la regle:\n");
+        if(strcmp(bc->conclusion->valeur, conclu)==0){
+            printf("Voici la regle:\n");
             afficherRegle(bc);
             return NULL;
         }else{
-            bc->suivant=searchconclu_show(bc->suivant,conclu);
+            bc->suivant = search_conclu_show(bc->suivant, conclu);
             return bc;
         }
     }
 }
 
-BC ajoutregleBC(BC bc){
-    char propo[20]={'\0'};
+BC ajout_regle_BC(BC bc){
+    
+    char propo[20] = {'\0'};
 
-    int choix=1;
-    printf("entrer votre conslusion\n");
-    scanf("%s",propo);
-    if(verification_conclusion_unique(bc,propo)==0){
+    int choix = 1;
+    printf("Entrez votre conclusion\n");
+    scanf("%s", propo);
+    if(verification_conclusion_unique(bc, propo)==0){
         return bc;
 
-    }else {
-        Regle *regle=creerRegle();
+    }else{
+        Regle *regle = creerRegle();
         regle = creerConclusion(regle, propo);
-    while(choix==1) {
-        printf("ajouter un Proposition de la presmisse:\n");
-        scanf("%s", propo);             //verifier si propo est réinitialisé automatiquement sinon risque de bug
-        regle = ajouteEnQueRegle(regle, propo);
+    while(choix==1){
+        printf("Ajouter un Proposition de la prémisse:\n");
+        scanf("%s", propo);             // verifier si propo est réinitialisé automatiquement sinon risque de bug
+        regle = ajouteEnQueueRegle(regle, propo);
 
-         regle->arbre=creerarbre_complet(regle->arbre, propo); //!!!!!!!!!!!!!!!!!!!
-            printf("continuer la prémisse ? si oui appuyer sur 1\n");
-        scanf("%d",&choix);
+        regle->arbre = creer_arbre_complet(regle->arbre, propo); //!!!!!!!!!!!!!!!!!!!
+        printf("Continuer la prémisse ? Si oui appuyer sur 1 :  \n");
+        scanf("%d", &choix);
     }
+    bc = ajoute_en_queue_BC(bc, regle);
+    return bc;
+    }
+}
 
+int verification_conclusion_unique(BC bc, char conclusion[]){
 
-        bc = ajouteEnQueBc(bc, regle);
-        return bc;
-
-    }}
-int verification_conclusion_unique(BC bc,char conclusion[]){
-
-    if(bc==NULL|| bc->premier->valeur[0]==' '){
+    if(bc==NULL || bc->premier->valeur[0]==' '){
         return 1;
     }else{
-        if(strcmp(bc->conclusion->valeur,conclusion)==0){
-            printf("votre conclusion existe déja");
+        if(strcmp(bc->conclusion->valeur, conclusion)==0){
+            printf("Votre conclusion existe déja\n");
             return 0;
         }else{
-           return verification_conclusion_unique(bc->suivant,conclusion);
+           return verification_conclusion_unique(bc->suivant, conclusion);
         }
     }
 }
-void consultertoutelaBC(BC bc) {
-    if (bc == NULL ) {
+
+void consulter_toute_la_BC(BC bc){
+    
+    if (bc==NULL ){
         printf("\nfin\n");
     }else {
-        if (bc->premier->valeur[0] == ' ') {
+        if (bc->premier->valeur[0]==' '){
             printf("\nfin\n");
         } else {
-
-
             afficherRegle(bc);
-            consultertoutelaBC(bc->suivant);
+            consulter_toute_la_BC(bc->suivant);
         }
     }
 }
 
-BC creerBC(){
+BC creer_BC(){
 
-    BC bc=malloc(sizeof(BC));
+    BC bc = malloc(sizeof(BC));
     Regle *regle = creerRegle();
-    if (regle == NULL || regle->premier == NULL) {
+    if (regle==NULL || regle->premier==NULL){
         exit(EXIT_FAILURE);
     }
-
-    bc=regle;
-
-
+    bc = regle;
     return bc;
 }
 
-Regle* insertiondsr(int max ,char* tableau[],Regle *regle,char* conclusion){
+Regle* insertiondsr(int max, char* tableau[], Regle *regle, char* conclusion){
+    
     for(int i=0;i<max;i++){
-        regle->arbre=creerarbre_complet(regle->arbre, tableau[i]);
-        regle=ajouteEnQueRegle(regle,tableau[i]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        regle->arbre = creer_arbre_complet(regle->arbre, tableau[i]);
+        regle = ajouteEnQueueRegle(regle, tableau[i]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     regle=creerConclusion(regle, conclusion);
-    regle->suivant=NULL;
+    regle->suivant = NULL;
     return regle;
 }
 
-
-BC initBC(BC bc){ // Initialise la BC "Maladie" en ajoutant toutes les règles de symptomes=>maladie
-
-    Regle *grippe = creerRegle();
-    char* symptomeGrippe[4] = {"FIEVRE", "TOUX", "FATIGUE", "COURBATURE"};
-    insertiondsr(4,symptomeGrippe,grippe,"grippe");
-   /* for (int i=0; i<4; i++) {
-        grippe->premier = ajouteEnQueRec(grippe->premier, symptomeGrippe[i]);
-    }*/
-  //  creerConclusion(grippe->premier, "grippe");
-
-    Regle *angine = creerRegle();
-    char* symptomeAngine[4] = {"FIEVRE", "TOUX", "MAL DE GORGE", "FATIGUE"};
-    /*for (int i=0; i<4; i++) {
-        angine->premier = ajouteEnQueRec(angine->premier, symptomeAngine[i]);
-    }
-    creerConclusion(angine->premier, "angine");*/
-    insertiondsr(4,symptomeAngine,angine,"angine");
-
-    Regle *covid19 = creerRegle();
-    char* symptomeCovid19[4] = {"FIEVRE", "TOUX", "PERTE DE GOUT", "PERTE D'ODORAT"};
-    /*for (int i=0; i<4; i++) {
-        angine->premier = ajouteEnQueRec(covid19->premier, symptomeCovid19[i]);
-    }
-    creerConclusion(covid19->premier, "covid19");*/
-    insertiondsr(4,symptomeCovid19,covid19,"covid19");
-
-   // afficherRegle(grippe); // à enlever c'était pour test
-  //  afficherRegle(angine); // à enlever c'était pour test
-
-    bc = ajouteEnQueBc(bc , grippe);
-
-    bc = ajouteEnQueBc(bc , angine);
-    bc = ajouteEnQueBc(bc , covid19);
-return bc;
-
-
-}
-
-/*BC ajouteEnQuebc(BC bc , Regle *regle){
-
-    if (bc==NULL){
-        bc=regle;
-        bc->suivant=NULL;
-        return bc;
-
-    }
-
-    bc->suivant=ajouteEnQuebc(restebc(bc),regle);
-
-
-    return  bc;
-
-
-
-}*/
-
-BC ajouteEnQueBc(BC bc,  Regle *regle) { //Ajoute récursivement une proposition en queue
-if(bc==NULL){
-
-    bc=regle;
-
-    return bc;
-}else{
-    if(bc->premier->valeur[0]==' '){
-        bc=regle;
+BC ajoute_en_queue_BC(BC bc, Regle *regle){   // Ajoute récursivement une proposition en queue
+    
+    if(bc==NULL){
+        bc = regle;
         return bc;
     }else{
-        bc->suivant = ajouteEnQueBc(bc->suivant, regle);
-        return bc;
+        if(bc->premier->valeur[0]==' '){
+            bc = regle;
+            return bc;
+        }else{
+            bc->suivant = ajoute_en_queue_BC(bc->suivant, regle);
+            return bc;
+        }
     }
 }
-
-
-
-
-
-
-}
-
-
 
 /*BC restebc(BC bc){
 
     printf("tu es la1\n");
 
-    if(bc.suivant->suivant==NULL) {
+    if(bc.suivant->suivant==NULL){
         printf("tu es la 2 ");
 
         bc.suivant=NULL;
@@ -318,8 +245,9 @@ if(bc==NULL){
         return bc;
     }
 }*/
+
 Regle* renvoitetebc(BC bc){
-    printf("renvoi de la tete , la valeur de la regle 1 est %c",bc->suivant->premier->valeur);
+    printf("Renvoi de la tete, la valeur de la regle 1 est %c",bc->suivant->premier->valeur);
     return bc;
 }
 

@@ -1,11 +1,13 @@
-//
-// Created by denis on 05/12/2020.
-//
-
 #ifndef PROJETLO21_ALLSTRUCTURE_H
 #define PROJETLO21_ALLSTRUCTURE_H
-#include "allstructure.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <conio.h>
+
+#include "allstructure.h"
 
 typedef struct proposition
 {
@@ -13,7 +15,6 @@ typedef struct proposition
     struct proposition* suivant;
 }Proposition;
 
-//typedef Proposition* Regle;
 typedef struct elem{
     char propo[20];
     struct elem* fg;
@@ -29,9 +30,12 @@ typedef struct regle
     struct regle* suivant;
     arbreb arbre;
     int nbpropo;
+    int nbpropovrai;
+    bool reponse;
 }Regle;
 
 typedef Proposition* BF;
 typedef Regle* BC;
+
 
 #endif //PROJETLO21_ALLSTRUCTURE_H

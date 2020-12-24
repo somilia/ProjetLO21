@@ -3,11 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include "consulter.h"
-#include "BF.h"
+#include "bf.h"
 #include "menu.h"
 #include "bc.h"
 #include "regle.h"
-#include "BF.h"
+#include "bf.h"
 #include "menu.h"
 
 #include "regle.h"
@@ -52,30 +52,31 @@ int main() {
 
     printf("\nTest de la BC:\n");
 
-    BC bc = creerBC();
+    BC bc = creer_BC();
     bc=initBC(bc);
 
     afficherRegle(bc);
 printf("teste");
   //  Regle *test2;
   //  test2 = creerRegle("toux");
-  //  test2->premier = ajouteEnQueRec(test2->premier, "B");
+  //  test2->premier = ajouteEnQueueRec(test2->premier, "B");
 
-  //  bc = ajouteEnQueBc(bc , test2->premier);
+  //  bc = ajoute_en_queue_BC(bc , test2->premier);
   //  test2=renvoitetebc(bc);
-  consulterlisteRegle(bc,0);
-     consulterreglechoisi("grippe", bc);
+  consulter_liste_regle(bc,0);
+     consulter_regle_choisi("grippe", bc);
 */
     /*BF bf=malloc(sizeof(*bf));
     bf->valeur[0]=0;
-    //bf=ajoutBf(bf);
+    //bf=ajout_Bf(bf);
    bf= ajouteEnQueRec(bf,"zizi");
     bf=ajouteEnQueRec(bf,"lour");
-    bf=ajouteEnQueRec(bf,"cassee");
+    bf=ajouteEnQueueRec(bf,"cassee");
     consulterBf(bf);
-    bf=suppressionfait(bf,"lour");
+    bf=suppression_fait(bf,"lour");
 
-    consulterBf(bf);*/
+    consulter_Bf(bf);*/
+
     initialisation();
     return 0;
 }

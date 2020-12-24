@@ -1,103 +1,106 @@
-//
-// Created by denis on 02/12/2020.
-//
-#include "bc.h"
-#include "regle.h"
-#include "BF.h"
-#include "menu.h"
-#include "menu.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "regle.h"
-#include "consulter.h"
-#include "BF.h"
+
 #include "allstructure.h"
+#include "regle.h"
+#include "bc.h"
+#include "bf.h"
 #include "arbre.h"
+#include "menu.h"
+#include "consulter.h"
+#include "testbase.h"
 #include "fichier.h"
+#include "new_comparing.h"
 
 void initialisation(){
-    BC bc=creerBC();
-    BF bf=creerBf();
-    char nom[20]={0};
-    printf("entrez votre nom");
-    scanf("%s",nom);
-    menuprincipale(bc,bf,nom);
+
+    BC bc= creer_BC();
+    BF bf=creer_Bf();
+    char nom[5]={0};
+
+    printf("Entrez votre nom :  ");
+    scanf("%s", nom);
+    menu_principale(bc, bf, nom);
 }
-void menuprincipale(BC bc,BF bf,char nom[]){
+
+void menu_principale(BC bc, BF bf, char nom[]){
+
     int choix=0;
 
-    while(choix!=7) {
+    while(choix!=7){
         system("cls");
         printf("*************Bienvenue****************");
-        printf("\n\n\nque voulez vous faire : \n");
-        printf("1) menu base de connaissance\n");
-        printf("2) menu base de faits\n");
-        printf("3) lire une regle\n");
-        printf("4) menu des sauvegardes\n");
+        printf("\n\n\nQue voulez-vous faire : \n");
+        printf("1) Menu base de connaissance\n");
+        printf("2) Menu base de faits\n");
+        printf("3) Lire une regle\n");
+        printf("4) Menu des sauvegardes\n");
+        printf("5) Moteur d'inférence\n");
+        printf("6) Simple recherche\n");
+        printf("7) Quitter\n");
+        scanf("%d", &choix);
 
-        printf("5) tester la base de faits\n");
-        printf("6) quitter\n");
-       scanf("%d", &choix);
-        //choix=4;
     switch (choix){
         case 1 :
-            menuBC(bc,bf,nom);
+            menu_BC(bc, bf, nom);
+
             break;
         case 2:
-            menuBf(bc,bf,nom);
+            menu_Bf(bc, bf, nom);
+
             break;
         case 3:
             system("cls");
             consulter_bc_regle(bc);
-            conitnuer();
+            continuer();
+
             break;
         case 4:
            // ajout_regle_fichier(bc,"evan");
-            menusauvegarde(bc,bf,nom);
+            menu_sauvegarde(bc, bf, nom);
 
             break;
-
         case 5:
             system("cls");
-
-            menu_comparaison(bc,bf);
-            conitnuer();
+            menu_comparaison_automatique(bc, bf);
+            continuer();
 
             break;
         case 6:
+            system("cls");
+            menu_comparaison(bc, bf);
+            continuer();
 
             break;
-
+        case 7:
+            exit(1);
+        }
     }
 }
 
+void menu_sauvegarde(BC bc, BF bf, char nom[]){
 
-
-}
-
-
-void menusauvegarde(BC bc,BF bf, char nom[]){
     int choix=0;
     while(choix != 1 && choix !=2 && choix!=3){
-    printf("que voulez vous faire ?\n");
-    printf("1) recupératiion de donné");
-    printf("2) deposer les donnés");
-    printf("3) retour");
+    printf("Que voulez-vous faire ?\n");
+    printf("1) Récupération de donnée");
+    printf("2) Déposer les données");
+    printf("3) Retour");
     scanf("%d",&choix);
+
     switch(choix){
-        case 1 : bc= initialisation_creation_bc(bc,nom);
-        break;
-        case 2:
-            ajout_regle_fichier(bc,nom);
+        case 1 : bc= initialisation_creation_bc(bc, nom);
             break;
-        case 3 :
-            menuprincipale(bc,bf,nom);
-break;
-    }}
-    conitnuer();
-    menuprincipale(bc,bf,nom);
-
-
+        case 2:
+            ajout_regle_fichier(bc, nom);
+            break;
+        case 3:
+            menu_principale(bc, bf, nom);
+            break;
+        }
+    }
+    continuer();
+    menu_principale(bc, bf, nom);
 }
