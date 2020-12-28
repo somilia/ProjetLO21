@@ -165,18 +165,33 @@ void consulter_Bf(BF bf){
 }
 
 BF ajout_Bf(BF bf){
-
     char fait[20];
     int choix = 1;
     while(choix==1){
         printf("Que voulez-vous ajouter ? :  \n");
         scanf("%s", fait);
+        if(non_doublon_bf(bf,fait)==true){
+            bf = ajouteEnQueueRec(bf, fait);
 
-        bf = ajouteEnQueueRec(bf, fait);
+        }else{
+            printf("attention element deja present\n");
+        }
         printf("Voulez-vous ajouter un nouveau fait ? Appuyer sur 1 pour continuer :  ");
         scanf("%d", &choix);
     }
     return bf;
+}
+bool non_doublon_bf(BF bf, char tab[]){
+    if(bf==NULL){
+        return true;
+    }else{
+        if (strcmp(bf->valeur,tab)==0){
+            return false;
+        }else{
+            return non_doublon_bf(bf->suivant,tab);
+        }
+    }
+
 }
 
 BF supp_Bf(BF bf){   // à verifier si ça supprime bien tous les éléments

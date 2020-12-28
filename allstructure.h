@@ -25,13 +25,13 @@ typedef noeud *arbreb;
 
 typedef struct regle
 {
-    Proposition * premier;
-    Proposition * conclusion;
-    struct regle* suivant;
-    arbreb arbre;
-    int nbpropo;
-    int nbpropovrai;
-    bool reponse;
+    Proposition * premier;    // pointeur sur la première proposition
+    Proposition * conclusion; // pointeur sur la conclusion
+    struct regle* suivant;    // règle suivante
+    arbreb arbre;             // pointeur sur l'arbre
+    int nbpropo;              // le nombre de proposition
+    int nbpropovrai;          // le nombre de proposition considéré comme vrai
+    bool reponse;             // vaut 1 si la règle est vrai
 }Regle;
 
 typedef Proposition* BF;

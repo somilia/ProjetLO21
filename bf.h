@@ -31,6 +31,14 @@ void consulter_Bf(BF bf);
  */
 BF ajout_Bf(BF bf);
 
+/******************
+ *
+ * @param base de fait BF
+ * @param chaîne de caractère tab
+ * @return vrai si tab n'est pas deja contenu dans bf
+ */
+bool non_doublon_bf(BF bf, char tab[]);
+
 /*******
 *
 * @param base de fait BF
