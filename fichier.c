@@ -127,7 +127,7 @@ BC initialisation_creation_bc(BC bc, char nom[]){
                     mot[i] = '\0';
                     i++;
                 }
-              //  fseek(fichier, -1,SEEK_CUR);
+                //  fseek(fichier, -1,SEEK_CUR);
                 i=0;
 
                 if (regle->conclusion==NULL){
@@ -153,7 +153,7 @@ BC initialisation_creation_bc(BC bc, char nom[]){
                 mot[0]='\0';
             }
             bc=ajout_regle_bc_fichier(bc,regle);
-            printf("%s",bc->premier->valeur);
+
             regle=NULL;
         }
 
@@ -163,22 +163,11 @@ BC initialisation_creation_bc(BC bc, char nom[]){
     return bc;
 }
 
-
 BC ajout_regle_bc_fichier(BC bc, Regle *regle){
 
     Regle* pointeur = regle;
     bc= ajoute_en_queue_BC(bc, pointeur);
     return bc;
-}
-
-Regle *supp_regle(Regle *regle){
-
-    if(regle->conclusion!=NULL){
-        free(regle->conclusion);
-    }
-    regle->premier=supp_regle_premier(regle->premier->suivant);
-
-    return regle;
 }
 
 Proposition* supp_regle_premier(Proposition* propo){

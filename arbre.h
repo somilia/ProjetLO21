@@ -30,9 +30,9 @@ arbreb creer_arbre();
 
 
 Regle* inserer_regle_arbre(BC bc, BF bf);
-int correspondance(arbreb arbre, BF bf);
+bool correspondance(arbreb arbre, BF bf);
 void afficher(arbreb arbre);
-int comparaison(arbreb arbre, BF bf);
+bool comparaison(arbreb arbre, BF bf);
 void comparaison_bc_bf_partielle(BC bc, BF bf);
 
 
@@ -46,7 +46,7 @@ void comparaison_bc_bf_partielle(BC bc, BF bf);
 int nb_propo_bf(BF bf, int compt);
 
 
-int comparaison_absolue(BC bc, BF bf);
+bool comparaison_absolue(BC bc, BF bf);
 void comparaison_bc_bf_strict(BC bc, BF bf);
 void menu_comparaison(BC bc, BF bf);
 

@@ -130,6 +130,7 @@ bool comparaison_bc_bf_partielle2(BC bc, BF bf){  // renvoi 1 si nouveau fait d�
 }
 
 bool verification_conclusion_non_presente(BF bf, char tab[]){
+
     if(bf==NULL){
         return true;
     }else{
@@ -156,9 +157,33 @@ BC reinitialisation_complete_bc(BC bc){
 
 void menu_comparaison_automatique(BC bc, BF bf){
 
+    bf_initial(bf);
     while(comparaison_bc_bf_partielle2(bc, bf) == 1){   // tant que il y a eut une modification dans la boucle
-        bc = reinitialisation_bc(bc);                   // on réinitialise les variables qui viennent d'être modifiées avant de recommencer
+        bc = reinitialisation_bc(bc);                   // on reinitialise les variables qui viennent d'être modifié avant de recommencer
     }
     bc = reinitialisation_complete_bc(bc);
-    consulter_Bf(bf);
+    bf_final(bf);
 }
+
+void bf_initial(BF bf){
+
+    printf("\nVoici votre base de fait initial\n ");
+    presentation_bf(bf,0);
+};
+
+void bf_final(BF bf){
+
+    printf("\nVoici votre base de fait final \n");
+    presentation_bf(bf,0);
+};
+
+void presentation_bf(BF bf, int compt){
+
+    if(bf==NULL) {
+        printf("\n fin \n");
+    }
+    else {
+        printf("%d)  %s\n", compt, bf->valeur);
+        presentation_bf(bf->suivant, compt+1);
+    }
+};

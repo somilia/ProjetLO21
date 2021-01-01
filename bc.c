@@ -147,12 +147,12 @@ BC ajout_regle_BC(BC bc){
         Regle *regle = creerRegle();
         regle = creerConclusion(regle, propo);
     while(choix==1){
-        printf("Ajouter un Proposition de la prémisse:\n");
+        printf("Ajouter un Proposition de la premisse:\n");
         scanf("%s", propo);             // verifier si propo est réinitialisé automatiquement sinon risque de bug
         regle = ajouteEnQueueRegle(regle, propo);
 
         regle->arbre = creer_arbre_complet(regle->arbre, propo); //!!!!!!!!!!!!!!!!!!!
-        printf("Continuer la prémisse ? Si oui appuyer sur 1 :  \n");
+        printf("Continuer la premisse ? Si oui appuyer sur 1 :  \n");
         scanf("%d", &choix);
     }
     bc = ajoute_en_queue_BC(bc, regle);
@@ -166,7 +166,7 @@ int verification_conclusion_unique(BC bc, char conclusion[]){
         return 1;
     }else{
         if(strcmp(bc->conclusion->valeur, conclusion)==0){
-            printf("Votre conclusion existe déja\n");
+            printf("Votre conclusion existe deja\n");
             return 0;
         }else{
            return verification_conclusion_unique(bc->suivant, conclusion);

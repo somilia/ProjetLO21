@@ -115,7 +115,7 @@ BF supp_Fait(BF bf){
 BF suppression_fait(BF bf, char fait[]){
 
     if(bf==NULL){
-        printf("Cette élément n'est pas dans la base\n");
+        printf("Cette element n'est pas dans la base\n");
         return bf;
     }else{
         if(strcmp(bf->valeur,fait)==0){

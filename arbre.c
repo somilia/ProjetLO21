@@ -127,7 +127,7 @@ Regle* inserer_regle_arbre(BC bc, BF bf){
     }
 }
 
-int correspondance(arbreb arbre, BF bf){
+bool correspondance(arbreb arbre, BF bf){
 
     int solution;
     if (arbre==NULL){
@@ -213,7 +213,7 @@ void comparaison_bc_bf_strict(BC bc, BF bf){
     }
 }
 
-int comparaison(arbreb arbre, BF bf){
+bool comparaison(arbreb arbre, BF bf){
 
     int error = 1;
     if(bf!=NULL && arbre!=NULL){
@@ -235,7 +235,7 @@ int comparaison(arbreb arbre, BF bf){
     }
 }
 
-int comparaison_absolue(BC bc, BF bf){
+bool comparaison_absolue(BC bc, BF bf){
 
     int compt = 0;
     int error = 1;
@@ -277,9 +277,9 @@ void menu_comparaison(BC bc,BF bf){
     int choix = 0;
     while(choix!=1 && choix!=2){
         printf("Voulez vous une comparaison \n1)Strict ? \n2)Large ?\n");
-        printf("Ici, vous pouvez simplement comparer votre base de fait et il sera affiché toutes les regles contenant :\n ");
+        printf("Ici, vous pouvez simplement comparer votre base de fait et il sera affiche toutes les regles contenant :\n ");
         printf("- Strict : exactement tous les element de la base de fait\n");
-        printf("- Large : contenant toutes la base de fait mais peu aussi contenir d'autres propositions\n");
+        printf("- Large : contenant toute la base de fait mais peu aussi contenir d'autres propositions\n");
 
         scanf("%d", &choix);
     }
